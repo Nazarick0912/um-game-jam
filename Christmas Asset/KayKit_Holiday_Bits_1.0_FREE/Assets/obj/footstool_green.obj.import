@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cy7c2a750p3dw"
+path="res://.godot/imported/footstool_green.obj-4e42cf3ec5db8930c8d807b1f7c907aa.mesh"
+
+[deps]
+
+files=["res://.godot/imported/footstool_green.obj-4e42cf3ec5db8930c8d807b1f7c907aa.mesh"]
+
+source_file="res://Christmas Asset/KayKit_Holiday_Bits_1.0_FREE/Assets/obj/footstool_green.obj"
+dest_files=["res://.godot/imported/footstool_green.obj-4e42cf3ec5db8930c8d807b1f7c907aa.mesh", "res://.godot/imported/footstool_green.obj-4e42cf3ec5db8930c8d807b1f7c907aa.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

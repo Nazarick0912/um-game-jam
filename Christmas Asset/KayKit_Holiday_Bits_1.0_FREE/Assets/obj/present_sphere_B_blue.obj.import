@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://d2ww22svsl3xq"
+path="res://.godot/imported/present_sphere_B_blue.obj-4bd8e1e01ecbaf1d2dde3d41a9ecd06a.mesh"
+
+[deps]
+
+files=["res://.godot/imported/present_sphere_B_blue.obj-4bd8e1e01ecbaf1d2dde3d41a9ecd06a.mesh"]
+
+source_file="res://Christmas Asset/KayKit_Holiday_Bits_1.0_FREE/Assets/obj/present_sphere_B_blue.obj"
+dest_files=["res://.godot/imported/present_sphere_B_blue.obj-4bd8e1e01ecbaf1d2dde3d41a9ecd06a.mesh", "res://.godot/imported/present_sphere_B_blue.obj-4bd8e1e01ecbaf1d2dde3d41a9ecd06a.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

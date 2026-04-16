@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://cfc7rsh8a3n26"
+path="res://.godot/imported/tracks_straight_station.obj-66e072167955e1202ac9830d11aa80df.mesh"
+
+[deps]
+
+files=["res://.godot/imported/tracks_straight_station.obj-66e072167955e1202ac9830d11aa80df.mesh"]
+
+source_file="res://Christmas Asset/KayKit_Holiday_Bits_1.0_FREE/Assets/obj/tracks_straight_station.obj"
+dest_files=["res://.godot/imported/tracks_straight_station.obj-66e072167955e1202ac9830d11aa80df.mesh", "res://.godot/imported/tracks_straight_station.obj-66e072167955e1202ac9830d11aa80df.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
