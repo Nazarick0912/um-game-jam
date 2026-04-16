@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://w00pl356frv7"]
+
+[ext_resource type="Script" uid="uid://bgyv6lpds2i5d" path="res://Character_System/Player.gd" id="1_kpjcp"]
+[ext_resource type="PackedScene" uid="uid://u2rrtieqx1c6" path="res://Character_System/Knight.glb" id="2_kne1u"]
+[ext_resource type="AnimationLibrary" uid="uid://bgq77gqqd3klc" path="res://Character_System/Rig_Medium_MovementBasic.glb" id="3_kne1u"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q07pd"]
+radius = 0.9970703
+height = 2.8032227
+
+[node name="Player" type="RigidBody3D" unique_id=373667255]
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+can_sleep = false
+script = ExtResource("1_kpjcp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=391470997]
+transform = Transform3D(0.99999964, -0.00072576606, 0.00045198307, 0.0007259344, 0.9999997, -0.00039637974, -0.0004517127, 0.00039668783, 0.9999998, 0.025281906, 1.2477721, -0.00087483216)
+shape = SubResource("CapsuleShape3D_q07pd")
+
+[node name="Knight" parent="." unique_id=261265994 instance=ExtResource("2_kne1u")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Knight" unique_id=28185624]
+libraries/Rig_Medium_MovementBasic = ExtResource("3_kne1u")
+
+[node name="RayCast3D" type="RayCast3D" parent="Knight" unique_id=2134408388]
+target_position = Vector3(0, 0.5, 1.5)
+collision_mask = 3
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=887785279]
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=575861272]
+transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 8, 6)
+
+[node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="." unique_id=27431653]
+node_a = NodePath("..")
+
+[editable path="Knight"]
