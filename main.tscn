@@ -106,7 +106,7 @@ use_collision = true
 size = Vector3(3479.7, 0.50566405, 4578.2)
 
 [node name="Floor2" type="CSGBox3D" parent="Node3D" unique_id=1500818053]
-transform = Transform3D(1.1, 0, 0, 0, 7, 0, 0, 0, 1, -11.467131, 420.5756, -770.05493)
+transform = Transform3D(1.1, 0, 0, 0, 7, 0, 0, 0, 1, -11.467131, -12.1287775, -770.05493)
 material_override = SubResource("StandardMaterial3D_qsp4k")
 use_collision = true
 size = Vector3(3479.7, 0.50566405, 4578.2)
@@ -1074,7 +1074,7 @@ transform = Transform3D(-0.13237324, 0, -1.6441714, 0, 1.6669966, 0, 1.8310168, 
 transform = Transform3D(0.16338322, 0, -1.6419209, 0, 1.6669966, 0, 1.8285106, 0, 0.14671087, -14.960526, -0.2572062, 15.496072)
 
 [node name="chair_large_brown4" parent="." unique_id=1189526439 instance=ExtResource("64_f1p13")]
-transform = Transform3D(-0.13237324, 0, -1.6441714, 0, 1.6669966, 0, 1.8310168, 0, -0.11886524, -3.506295, -0.25720668, 15.833642)
+transform = Transform3D(-0.13237324, 0, -1.6441714, 0, 1.6669966, 0, 1.8310168, 0, -0.11886524, -3.5705223, -0.25720668, 15.828999)
 
 [node name="chair_large_brown3" parent="." unique_id=249950353 instance=ExtResource("64_f1p13")]
 transform = Transform3D(0.098317884, 0, 1.6460967, 0, 1.6669966, 0, -1.8331609, 0, 0.08828504, 1.7556235, -0.25720668, 16.01971)
