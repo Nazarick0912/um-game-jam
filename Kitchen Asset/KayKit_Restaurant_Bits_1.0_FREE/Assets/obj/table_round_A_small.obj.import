@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c1jnpj7y6ggue"
+path="res://.godot/imported/table_round_A_small.obj-003cca2f22e7949f67033edafb2c40fc.mesh"
+
+[deps]
+
+files=["res://.godot/imported/table_round_A_small.obj-003cca2f22e7949f67033edafb2c40fc.mesh"]
+
+source_file="res://Kitchen Asset/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/table_round_A_small.obj"
+dest_files=["res://.godot/imported/table_round_A_small.obj-003cca2f22e7949f67033edafb2c40fc.mesh", "res://.godot/imported/table_round_A_small.obj-003cca2f22e7949f67033edafb2c40fc.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

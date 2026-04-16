@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ba1fo71sncms2"
+path="res://.godot/imported/lid_large.obj-b0d1efb6b737a809f669dd7d14cd6587.mesh"
+
+[deps]
+
+files=["res://.godot/imported/lid_large.obj-b0d1efb6b737a809f669dd7d14cd6587.mesh"]
+
+source_file="res://Kitchen Asset/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/lid_large.obj"
+dest_files=["res://.godot/imported/lid_large.obj-b0d1efb6b737a809f669dd7d14cd6587.mesh", "res://.godot/imported/lid_large.obj-b0d1efb6b737a809f669dd7d14cd6587.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

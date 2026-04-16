@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://ceu6vcyddfury"
+path="res://.godot/imported/Primitive_Pillar.obj-9dc899e51be5b3b85c523a6cfd76cce0.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Primitive_Pillar.obj-9dc899e51be5b3b85c523a6cfd76cce0.mesh"]
+
+source_file="res://Assets 1/KayKit_Prototype_Bits_1.1_FREE/Assets/obj/Primitive_Pillar.obj"
+dest_files=["res://.godot/imported/Primitive_Pillar.obj-9dc899e51be5b3b85c523a6cfd76cce0.mesh", "res://.godot/imported/Primitive_Pillar.obj-9dc899e51be5b3b85c523a6cfd76cce0.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false

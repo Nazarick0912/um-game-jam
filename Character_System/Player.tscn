@@ -6,31 +6,48 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q07pd"]
 radius = 0.9970703
-height = 2.8032227
+height = 2.6672363
 
-[node name="Player" type="RigidBody3D" unique_id=373667255]
+[node name="Player" type="CharacterBody3D" unique_id=506474146]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
-can_sleep = false
 script = ExtResource("1_kpjcp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=391470997]
-transform = Transform3D(0.99999964, -0.00072576606, 0.00045198307, 0.0007259344, 0.9999997, -0.00039637974, -0.0004517127, 0.00039668783, 0.9999998, 0.025281906, 1.2477721, -0.00087483216)
+transform = Transform3D(0.99999964, -0.00072576606, 0.00045198307, 0.0007259344, 0.9999997, -0.00039637974, -0.0004517127, 0.00039668783, 0.9999998, 0.02523256, 1.3157653, -0.0008478601)
 shape = SubResource("CapsuleShape3D_q07pd")
 
 [node name="Knight" parent="." unique_id=261265994 instance=ExtResource("2_kne1u")]
 
+[node name="Skeleton3D" parent="Knight/Rig_Medium" parent_id_path=PackedInt32Array(261265994, 2047537895) index="0" unique_id=636874165]
+bones/1/position = Vector3(0, 0.39206383, 0)
+bones/4/rotation = Quaternion(-0.58795244, -0.10844585, -0.645398, 0.47540814)
+bones/5/rotation = Quaternion(2.1184832e-08, -5.03675e-08, -0.4973854, 0.86752975)
+bones/7/rotation = Quaternion(-0.31667742, -0.34757897, 0.22899799, 0.8523287)
+bones/8/rotation = Quaternion(-3.58774e-09, 6.9489703e-09, -0.7071068, 0.7071067)
+bones/9/rotation = Quaternion(-0.5802813, 0.15828462, 0.66605324, 0.44112664)
+bones/10/rotation = Quaternion(9.095458e-09, 4.8284473e-08, 0.42497087, 0.9052071)
+bones/12/rotation = Quaternion(-0.35023588, 0.29147267, -0.1967616, 0.86813796)
+bones/13/rotation = Quaternion(-9.535865e-10, -4.3147668e-09, 0.7071068, 0.7071067)
+bones/15/position = Vector3(-0.17094505, 0.11358726, 1.3923275e-08)
+bones/15/rotation = Quaternion(0.9958909, 1.3462449e-07, -2.7306665e-08, 0.09056074)
+bones/16/rotation = Quaternion(0.2913201, -6.604816e-08, 2.0231164e-07, 0.95662564)
+bones/17/rotation = Quaternion(-0.55491084, 1.9804874e-07, -7.8918305e-08, 0.8319099)
+bones/18/rotation = Quaternion(-4.8799076e-09, 0.92023516, -0.39136574, 5.3284225e-08)
+bones/19/position = Vector3(0.17094505, 0.11358726, 1.3923275e-08)
+bones/19/rotation = Quaternion(0.9958909, -1.2840718e-07, -1.6118022e-08, 0.09056074)
+bones/20/rotation = Quaternion(0.2913201, 6.604815e-08, -2.0231167e-07, 0.95662564)
+bones/21/rotation = Quaternion(-0.55491084, -3.325076e-08, 7.4074142e-09, 0.8319099)
+bones/22/rotation = Quaternion(3.4523627e-08, 0.92023516, -0.39136574, 7.002516e-08)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Knight" unique_id=28185624]
 libraries/Rig_Medium_MovementBasic = ExtResource("3_kne1u")
-
-[node name="RayCast3D" type="RayCast3D" parent="Knight" unique_id=2134408388]
-target_position = Vector3(0, 0.5, 1.5)
-collision_mask = 3
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=887785279]
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=575861272]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 8, 6)
+transform = Transform3D(0.90630776, 0.29883623, -0.29883623, 0, 0.70710677, 0.70710677, 0.42261827, -0.6408563, 0.6408563, 0, 5.685439, 4.69844)
+current = true
 
 [node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="." unique_id=27431653]
 node_a = NodePath("..")

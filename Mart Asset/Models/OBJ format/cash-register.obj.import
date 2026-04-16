@@ -1,0 +1,25 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bxwbey6kajg4o"
+path="res://.godot/imported/cash-register.obj-35fa74f831cfd19fd12906dd850f1096.mesh"
+
+[deps]
+
+files=["res://.godot/imported/cash-register.obj-35fa74f831cfd19fd12906dd850f1096.mesh"]
+
+source_file="res://Mart Asset/Models/OBJ format/cash-register.obj"
+dest_files=["res://.godot/imported/cash-register.obj-35fa74f831cfd19fd12906dd850f1096.mesh", "res://.godot/imported/cash-register.obj-35fa74f831cfd19fd12906dd850f1096.mesh"]
+
+[params]
+
+generate_tangents=true
+generate_lods=true
+generate_shadow_mesh=true
+generate_lightmap_uv2=false
+generate_lightmap_uv2_texel_size=0.2
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+force_disable_mesh_compression=false
