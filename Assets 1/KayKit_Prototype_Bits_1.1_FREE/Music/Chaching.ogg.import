@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dtppri4gd0flc"
+path="res://.godot/imported/Chaching.ogg-5ff04425c1d21cee725c2d1f9268994e.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets 1/KayKit_Prototype_Bits_1.1_FREE/Music/Chaching.ogg"
+dest_files=["res://.godot/imported/Chaching.ogg-5ff04425c1d21cee725c2d1f9268994e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

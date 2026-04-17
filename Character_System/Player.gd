@@ -15,6 +15,9 @@ extends CharacterBody3D
 @export var TOTAL_TIME = 60.0
 var play_time_passed: float = 0.0
 var sway_phase: float = 0.0
+var _was_moving: bool = false
+
+var move_sfx_player: AudioStreamPlayer
 
 # --- Node References ---
 @onready var visual_model = $Knight
@@ -27,6 +30,10 @@ var sway_phase: float = 0.0
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	move_sfx_player = AudioStreamPlayer.new()
+	move_sfx_player.stream = load("res://Assets 1/KayKit_Prototype_Bits_1.1_FREE/Music/Hey watch it.ogg")
+	add_child(move_sfx_player)
 
 func _input(event):
 	# 1. Handle Mouse Movement (Look)
@@ -62,6 +69,12 @@ func _physics_process(delta: float) -> void:
 	# --- 2. Movement Logic ---
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
+	var is_moving_now = direction != Vector3.ZERO
+	if is_moving_now and not _was_moving and is_on_floor():
+		if move_sfx_player:
+			move_sfx_player.play()
+	_was_moving = is_moving_now
 	
 	if direction:
 		velocity.x = direction.x * SPEED
