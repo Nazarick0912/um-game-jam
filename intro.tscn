@@ -111,3 +111,28 @@ offset_top = -44.0
 offset_right = 240.0
 offset_bottom = -10.0
 text = "🛒  UM Game Jam • 2026"
+
+[node name="HelpButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 0.0
+grow_horizontal = 0
+grow_vertical = 1
+offset_left = -70.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = 70.0
+text = "?"
+
+[node name="RulesDialog" type="AcceptDialog" parent="."]
+title = "Market Madness - Rules"
+dialog_text = "HOW TO PLAY:
+1. Move with WASD / Arrow Keys.
+2. Grab items using the Shopping Cart.
+3. Avoid chaotic customers!
+
+WIN CONDITION:
+Fill your shopping bag with all items on your list before the timer runs out!"

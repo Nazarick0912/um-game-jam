@@ -23,6 +23,8 @@ const SNOWFLAKE_COUNT   := 22
 @onready var start_button   : Button         = $Card/VBox/StartButton
 @onready var hint_label     : Label          = $Card/VBox/HintLabel
 @onready var footer_label   : Label          = $FooterLabel
+@onready var help_button    : Button         = $HelpButton
+@onready var rules_dialog   : AcceptDialog   = $RulesDialog
 
 # ─── Runtime state ───────────────────────────
 var _time          : float = 0.0
@@ -71,6 +73,30 @@ func _apply_styles() -> void:
 	card_style.content_margin_top         = 40
 	card_style.content_margin_bottom      = 40
 	card.add_theme_stylebox_override("panel", card_style)
+
+	# ── Help Button Style ──
+	help_button.text = "?"
+	help_button.custom_minimum_size = Vector2(50, 50)
+	# Positioning help button to top right
+	help_button.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT, Control.PRESET_MODE_MINSIZE, 20)
+	help_button.pressed.connect(_on_help_pressed)
+	
+	# ── Rules Dialog Setup ──
+	rules_dialog.title = "Market Madness - Rules"
+	rules_dialog.dialog_text = "HOW TO PLAY:\n" + \
+		"1. Move with WASD / Arrow Keys.\n" + \
+		"2. Grab items using the Shopping Cart.\n" + \
+		"3. Avoid chaotic customers!\n\n" + \
+		"WIN CONDITION:\n" + \
+		"Fill your shopping bag with all items on your list before the timer runs out!"
+
+	var help_style := StyleBoxFlat.new()
+	help_style.bg_color = Color(0.2, 0.2, 0.4, 0.8)
+	help_style.corner_radius_top_left = 25
+	help_style.corner_radius_top_right = 25
+	help_style.corner_radius_bottom_left = 25
+	help_style.corner_radius_bottom_right = 25
+	help_button.add_theme_stylebox_override("normal", help_style)
 
 	# ── Title ──
 	title_label.add_theme_font_size_override("font_size", 52)
@@ -221,12 +247,13 @@ func _play_intro_animation() -> void:
 	tw5.tween_property(hint_label,   "modulate", Color(1, 1, 1, 1), 0.3)
 	await tw5.finished
 
-	# ── Stage 6: trees + footer ──
+	# ── Stage 6: trees + footer + help button ──
 	var tw6 := create_tween()
 	tw6.set_parallel(true)
 	for t in _tree_labels:
 		tw6.tween_property(t, "modulate", Color(1, 1, 1, 1), 0.5)
 	tw6.tween_property(footer_label, "modulate", Color(1, 1, 1, 1), 0.4)
+	tw6.tween_property(help_button, "modulate", Color(1, 1, 1, 1), 0.4) # Fade in "?"
 	await tw6.finished
 
 	_can_start = true
@@ -300,3 +327,9 @@ func _on_start() -> void:
 
 	await tw.finished
 	get_tree().change_scene_to_file(MAIN_SCENE)
+
+# ─────────────────────────────────────────────
+#  HELP BUTTON HANDLER
+# ─────────────────────────────────────────────
+func _on_help_pressed() -> void:
+	rules_dialog.popup_centered()
