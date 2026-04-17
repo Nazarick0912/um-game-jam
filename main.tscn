@@ -308,7 +308,7 @@ transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -22.359262, -0.25720668, -42.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4494915, 0, 0.06386948)
 
 [node name="column" parent="Market Assets" unique_id=1524094388 instance=ExtResource("5_074og")]
-transform = Transform3D(1.1532798, 0, 0, 0, 2.0670502, 0, 0, 0, 1.3043051, 8.334755, -2.3841858e-07, 6.269716)
+transform = Transform3D(1.1532798, 0, 0, 0, 2.0670502, 0, 0, 0, 1.4040505, 8.334755, -2.3841858e-07, 6.1976047)
 
 [node name="display-bread" parent="Market Assets" unique_id=1662584656 instance=ExtResource("6_cegan")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9068925, 0, 0.7780533)
