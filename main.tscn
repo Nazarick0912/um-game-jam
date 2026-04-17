@@ -79,6 +79,11 @@
 [sub_resource type="Environment" id="Environment_gngh3"]
 background_mode = 1
 background_color = Color(0.6018315, 0.17132911, 0.882701, 0.26666668)
+tonemap_mode = 3
+tonemap_exposure = 0.85
+tonemap_white = 50.0
+ssao_enabled = true
+ssil_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qsp4k"]
 albedo_texture = ExtResource("1_vivmo")
