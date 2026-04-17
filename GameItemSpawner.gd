@@ -35,7 +35,6 @@ func _spawn_mapped_items() -> void:
 		"knife": {"match": "knife", "offset": 0.4},
 		"pan": {"match": "pan", "offset": 0.6},
 		"papertowel": {"match": "papertowel", "offset": 0.5},
-		"box": {"match": "box", "offset": 0.6},
 		"bread": {"match": "display-bread", "offset": 1.2},
 		"fruit": {"match": "display-fruit", "offset": 1.2},
 		"carrots": {"match": "crate_carrots", "offset": 0.6},

@@ -16,6 +16,7 @@ extends CharacterBody3D
 var play_time_passed: float = 0.0
 var sway_phase: float = 0.0
 var _was_moving: bool = false
+var _hey_played: bool = false
 
 var move_sfx_player: AudioStreamPlayer
 
@@ -71,9 +72,10 @@ func _physics_process(delta: float) -> void:
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	var is_moving_now = direction != Vector3.ZERO
-	if is_moving_now and not _was_moving and is_on_floor():
+	if is_moving_now and not _was_moving and is_on_floor() and not _hey_played:
 		if move_sfx_player:
 			move_sfx_player.play()
+			_hey_played = true
 	_was_moving = is_moving_now
 	
 	if direction:

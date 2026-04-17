@@ -19,7 +19,7 @@ shape = SubResource("CapsuleShape3D_q07pd")
 
 [node name="Knight" parent="." unique_id=261265994 instance=ExtResource("2_kne1u")]
 
-[node name="Skeleton3D" parent="Knight/Rig_Medium" parent_id_path=PackedInt32Array(261265994, 610399639) index="0" unique_id=1303877076]
+[node name="Skeleton3D" parent="Knight/Rig_Medium" parent_id_path=PackedInt32Array(261265994, 777362609) index="0" unique_id=1475402488]
 bones/1/position = Vector3(0, 0.39206383, 0)
 bones/4/rotation = Quaternion(-0.58795244, -0.10844585, -0.645398, 0.47540814)
 bones/5/rotation = Quaternion(2.1184832e-08, -5.03675e-08, -0.4973854, 0.86752975)

@@ -44,6 +44,9 @@ func _ready() -> void:
 	_reset_list()
 
 func _reset_list() -> void:
+	# Resume BGM if it was stopped (e.g. after a loss)
+	if bgm_player and not bgm_player.playing:
+		bgm_player.play()
 	shopping_list.clear()
 	
 	var ALL_AVAILABLE = [
