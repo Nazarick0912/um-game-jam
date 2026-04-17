@@ -116,3 +116,7 @@ func handle_game_over():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	if timer_text_edit:
 		timer_text_edit.text = "MISSION FAILED"
+	# Notify the new game mode manager so the shopping HUD shows the result
+	var gm := get_node_or_null("/root/GameModeManager")
+	if gm:
+		gm.notify_time_up()
