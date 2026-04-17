@@ -33,7 +33,13 @@ func _ready() -> void:
 
 	var anim: AnimationPlayer = chosen.get_node_or_null("AnimationPlayer")
 	if anim:
+		var anim_val = anim.get_animation("Rig_Medium_MovementBasic/Walking_A")
+		if anim_val:
+			anim_val.loop_mode = Animation.LOOP_LINEAR
 		anim.play("Rig_Medium_MovementBasic/Walking_A")
+
+	# Physically drop the visual skeletal meshes to perfectly match the floor tile
+	mesh_container.position.y -= 0.25
 
 	# Stay upright
 	axis_lock_angular_x = true

@@ -21,11 +21,38 @@ func _ready() -> void:
 	_reset_list()
 
 func _reset_list() -> void:
-	shopping_list = {
-		"milk":  { "label": "🥛 Milk",  "required": 1, "collected": 0 },
-		"bread": { "label": "🍞 Bread", "required": 1, "collected": 0 },
-		"box":   { "label": "📦 Box",   "required": 3, "collected": 0 },
-	}
+	shopping_list.clear()
+	
+	var ALL_AVAILABLE = [
+		{ "id": "milk",       "label": "🥛 Milk" },
+		{ "id": "cookie",     "label": "🍪 Cookie" },
+		{ "id": "mustard",    "label": "🌭 Mustard" },
+		{ "id": "ketchup",    "label": "🍅 Ketchup" },
+		{ "id": "jar",        "label": "🫙 Jar" },
+		{ "id": "pot",        "label": "🍲 Pot" },
+		{ "id": "pan",        "label": "🍳 Pan" },
+		{ "id": "papertowel", "label": "🧻 Paper Towel" },
+		{ "id": "bowl",       "label": "🥣 Bowl" },
+		{ "id": "knife",      "label": "🔪 Knife" },
+		{ "id": "box",        "label": "📦 Box" },
+		{ "id": "bread",      "label": "🍞 Bread" }
+	]
+	
+	# Scramble the list
+	ALL_AVAILABLE.shuffle()
+	
+	# Pick between 3 to 6 unique items to find
+	var amount_to_pick = randi_range(3, 6)
+	var picked_items = ALL_AVAILABLE.slice(0, amount_to_pick)
+	
+	for item in picked_items:
+		shopping_list[item["id"]] = {
+			"label": item["label"],
+			# Generate 1 to 3 copies per item
+			"required": randi_range(1, 3), 
+			"collected": 0
+		}
+		
 	_game_active = true
 	_game_ended  = false
 

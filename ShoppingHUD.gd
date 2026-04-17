@@ -83,7 +83,7 @@ func _build_list_panel() -> void:
 	vbox.add_child(sep)
 
 	_list_label = Label.new()
-	_list_label.add_theme_font_size_override("font_size", 15)
+	_list_label.add_theme_font_size_override("font_size", 24)
 	_list_label.add_theme_color_override("font_color", Color(0.95, 0.95, 1.0))
 	vbox.add_child(_list_label)
 
@@ -240,4 +240,7 @@ func _on_game_lost() -> void:
 
 func _on_restart() -> void:
 	get_tree().paused = false
+	var gm: Node = get_node_or_null("/root/GameModeManager")
+	if gm and gm.has_method("_reset_list"):
+		gm._reset_list()
 	get_tree().reload_current_scene()

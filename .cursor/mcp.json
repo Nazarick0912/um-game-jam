@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "godot": {
+      "command": "node",
+      "args": [
+        "/Users/elson/Documents/um-game-jam/godot-mcp/build/index.js"
+      ],
+      "env": {
+        "DEBUG": "true"
+      }
+    }
+  }
+}

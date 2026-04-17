@@ -11,8 +11,7 @@ extends Area3D
 ## Human-readable label shown above the item
 @export var item_display_name: String = "Milk"
 
-@onready var _mesh:   MeshInstance3D = $MeshInstance3D
-@onready var _label:  Label3D        = $Label3D
+@onready var _label:  Label3D = $Label3D
 
 var _collected: bool  = false
 var _bob_time:  float = 0.0
@@ -20,29 +19,63 @@ var _bob_time:  float = 0.0
 # Starting Y so we can bob relative to spawn position
 var _base_y: float = 0.0
 
+# 3D Mesh asset paths
+const ASSET_PATHS = {
+	"milk": "res://Christmas Asset/KayKit_Holiday_Bits_1.0_FREE/Assets/gltf/milk.gltf",
+	"cookie": "res://Christmas Asset/KayKit_Holiday_Bits_1.0_FREE/Assets/gltf/cookie.gltf",
+	"mustard": "res://Kitchen Asset/KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/mustard.gltf",
+	"ketchup": "res://Kitchen Asset/KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/ketchup.gltf",
+	"jar": "res://Kitchen Asset/KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/jar_A_medium.gltf",
+	"pot": "res://Kitchen Asset/KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/pot_A.gltf",
+	"bowl": "res://Kitchen Asset/KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/bowl.gltf",
+	"knife": "res://Kitchen Asset/KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/knife.gltf",
+	"box": "res://Mart Asset/Models/FBX format/shelf-boxes.fbx", # Generic fallback since individual boxes don't exist
+	"bread": "res://Mart Asset/Models/FBX format/display-bread.fbx" # Fallback
+}
+
+var _model: Node3D = null
+
+var skip_asset_load: bool = false
+var external_mesh_to_steal: Node3D = null
+
 func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	add_to_group("collectible_item")
 
 	_base_y = global_position.y
 
-	# Colour the sphere based on item type
-	var mat := StandardMaterial3D.new()
-	match item_id:
-		"milk":
-			mat.albedo_color        = Color(0.85, 0.95, 1.0)
-			mat.emission_enabled    = true
-			mat.emission            = Color(0.5, 0.7, 1.0)
-			mat.emission_energy_multiplier = 1.2
-		"box":
-			mat.albedo_color        = Color(0.78, 0.55, 0.25)
-			mat.emission_enabled    = true
-			mat.emission            = Color(0.9, 0.65, 0.2)
-			mat.emission_energy_multiplier = 0.8
-		_:
-			mat.albedo_color = Color(1, 1, 0)
+	# Clean out the old sphere placeholder if it exists
+	var old_mesh = get_node_or_null("MeshInstance3D")
+	if old_mesh:
+		old_mesh.queue_free()
 
-	_mesh.material_override = mat
+	if external_mesh_to_steal:
+		# Extract model gracefully from its map node parent and inject it into self
+		external_mesh_to_steal.reparent(self, true)
+		_model = external_mesh_to_steal
+		
+		# Extend the trigger radius drastically since physical table bodies block entry
+		var col_shape = get_node_or_null("CollisionShape3D")
+		if col_shape and col_shape.shape is SphereShape3D:
+			var large_sphere = SphereShape3D.new()
+			large_sphere.radius = 2.0
+			col_shape.shape = large_sphere
+			
+	elif item_id in ASSET_PATHS:
+		# Load dynamic 3D asset
+		var scene_path = ASSET_PATHS[item_id]
+		# Special handling: Since shelf-boxes.fbx and display-bread.fbx are massive shelves,
+		# and not single items, we should safely fall back to something small if Box/Bread is used.
+		# However, they might not be picked randomly anymore, but if they are, load a generic shape.
+		var packed_scene = load(scene_path)
+		if packed_scene:
+			_model = packed_scene.instantiate()
+			# Scale it up slightly for visibility and center it
+			_model.scale = Vector3(1.5, 1.5, 1.5)
+			# Lift it slightly to hover smoothly
+			_model.position.y += 0.3
+			add_child(_model)
+	
 	_label.text = item_display_name
 
 func _process(delta: float) -> void:
@@ -51,7 +84,11 @@ func _process(delta: float) -> void:
 	# Gentle bobbing + slow spin
 	_bob_time += delta
 	global_position.y = _base_y + sin(_bob_time * 2.2) * 0.12
-	rotation_degrees.y += delta * 60.0
+	
+	# Only spin dynamically generated assets models. Statically hand-placed meshes 
+	# should retain their level designer's fixed orientation layout natively.
+	if _model and external_mesh_to_steal == null:
+		_model.rotation_degrees.y += delta * 60.0
 
 func _on_body_entered(body: Node3D) -> void:
 	if _collected:

@@ -2,124 +2,131 @@ extends Node
 
 # ──────────────────────────────────────────────────────────
 #  GameItemSpawner
-#  Wraps EXISTING market assets as pick-up items at runtime.
-#  No new visual spheres are placed; the market's own models
-#  become the collectibles — a floating label and glow light
-#  appear above each one, and walking into it hides the model
-#  and credits the item to the shopping list.
+#  Scans the market map at runtime locating tables and shelves.
+#  Dynamically instantiates CollectibleItem.tscn at random
+#  flat surfaces near them avoiding static collision issues.
 # ──────────────────────────────────────────────────────────
 
-# ── Pickup definitions ────────────────────────────────────
-# node_path   : relative from GameItemSpawner (sibling of FLOOR, Assets, …)
-# item_id     : must match a key in GameModeManager.shopping_list
-# label       : text shown above the item
-# radius      : world-space pick-up sphere radius
-const ITEM_DEFS: Array = [
-	# ── Milk ────────────────────────────────────────────
-	{
-		"node_path": "../FLOOR/milk",
-		"item_id":   "milk",
-		"label":     "🥛 Milk",
-		"radius":    1.5,
-	},
-	# ── Bread / Food aisle ───────────────────────────────
-	{
-		"node_path": "../Assets/Market Assets/display-bread",
-		"item_id":   "bread",
-		"label":     "🍞 Bread",
-		"radius":    2.5,
-	},
-	# ── Boxes (shelf-boxes are literally stacked boxes) ──
-	{
-		"node_path": "../Assets/Market Assets/shelf-boxes",
-		"item_id":   "box",
-		"label":     "📦 Box",
-		"radius":    2.5,
-	},
-	{
-		"node_path": "../Assets/Market Assets/shelf-boxes2",
-		"item_id":   "box",
-		"label":     "📦 Box",
-		"radius":    2.5,
-	},
-	{
-		"node_path": "../Assets/Market Assets/shelf-boxes3",
-		"item_id":   "box",
-		"label":     "📦 Box",
-		"radius":    2.5,
-	},
-]
-
 func _ready() -> void:
-	# Wait one frame so every node has its final global transform
+	# Hide the statically hand-placed milk from the editor to avoid confusion
+	var static_milk = get_node_or_null("../FLOOR/milk")
+	if static_milk:
+		static_milk.queue_free()
+
+	# Give the scene a frame to initialize transformations
 	await get_tree().process_frame
-	for def in ITEM_DEFS:
-		var target: Node3D = get_node_or_null(def["node_path"]) as Node3D
-		if target:
-			_create_pickup_zone(target, def["item_id"], def["label"], def["radius"])
-		else:
-			push_warning("GameItemSpawner: node not found → " + str(def["node_path"]))
+	
+	_wrap_static_table_items()
+	
+	var spawn_points: Array[Vector3] = []
+	_generate_safe_aisle_points(spawn_points)
+	
+	if spawn_points.is_empty():
+		push_error("GameItemSpawner: Could not anchor aisles!")
+		for i in range(15):
+			spawn_points.append(Vector3(randf_range(-4, 4), 1.0, randf_range(-4, 4)))
+		
+	# Randomize locations for unpredictability
+	spawn_points.shuffle()
+	
+	# Fetch generated shopping list from Singleton
+	var items_to_spawn = []
+	var gm: Node = get_node_or_null("/root/GameModeManager")
+	if gm and "shopping_list" in gm:
+		var s_list = gm.shopping_list
+		for key in s_list:
+			for _i in range(s_list[key]["required"]):
+				items_to_spawn.append({
+					"id": key,
+					"label": s_list[key]["label"]
+				})
+				
+	var collectible_scene = preload("res://CollectibleItem.tscn")
+	
+	for i in range(items_to_spawn.size()):
+		var def = items_to_spawn[i]
+		
+		# Wrap around array index securely incase there's very little furniture 
+		var anchor = spawn_points[i % spawn_points.size()]
+		
+		# Add a subtle positional jitter to avoid mathematically perfect stacking
+		var pt = Vector3(
+			anchor.x + randf_range(-0.4, 0.4),
+			anchor.y,
+			anchor.z + randf_range(-0.4, 0.4)
+		)
+		
+		var inst = collectible_scene.instantiate()
+		inst.item_id = def["id"]
+		inst.item_display_name = def["label"]
+		inst.global_position = pt
+		
+		# Attach to map safely
+		get_parent().add_child.call_deferred(inst)
 
-# ── Create an invisible Area3D at the item's world position ─
-func _create_pickup_zone(
-		target:    Node3D,
-		item_id:   String,
-		label_txt: String,
-		radius:    float) -> void:
+# ── Static Extraction Routine ────────────────────────────
+func _wrap_static_table_items() -> void:
+	var item_root = get_node_or_null("../Assets/Item")
+	if not item_root: return
+	
+	var pans = []
+	var pots = []
+	var towels = []
+	
+	for child in item_root.get_children():
+		if child is Node3D:
+			var cname = child.name.to_lower()
+			if "pan_" in cname: pans.append(child)
+			elif "pot_b" in cname: pots.append(child)
+			elif "papertowel" in cname: towels.append(child)
+			
+	pans.shuffle()
+	pots.shuffle()
+	towels.shuffle()
+	
+	_wrap_subset(pans, "pan", "🍳 Pan", 3)
+	_wrap_subset(pots, "pot", "🍲 Pot", 3)
+	_wrap_subset(towels, "papertowel", "🧻 Paper Towel", 4)
 
-	var area := Area3D.new()
+func _wrap_subset(nodes: Array, id: String, labeltxt: String, count: int) -> void:
+	var collectible_scene = preload("res://CollectibleItem.tscn")
+	var limit = min(count, nodes.size())
+	for i in range(limit):
+		var target = nodes[i]
+		var inst = collectible_scene.instantiate()
+		inst.item_id = id
+		inst.item_display_name = labeltxt
+		
+		# Configure to steal/wrap the specific mapped mesh
+		inst.external_mesh_to_steal = target
+		inst.global_position = target.global_position
+		
+		# Insert explicitly securely into tree architecture 
+		target.get_parent().add_child.call_deferred(inst)
 
-	# Sphere detection
-	var col  := CollisionShape3D.new()
-	var sph  := SphereShape3D.new()
-	sph.radius  = radius
-	col.shape   = sph
-	area.add_child(col)
-
-	# Floating label above the item
-	var lbl := Label3D.new()
-	lbl.text          = label_txt
-	lbl.font_size     = 80
-	lbl.billboard     = BaseMaterial3D.BILLBOARD_ENABLED
-	lbl.no_depth_test = true
-	lbl.modulate      = Color(1.0, 0.95, 0.25)
-	lbl.outline_size  = 8
-	lbl.outline_modulate = Color(0.0, 0.0, 0.0, 0.85)
-	lbl.position      = Vector3(0.0, 2.5, 0.0)
-	area.add_child(lbl)
-
-	# Soft glow to make pick-up visible in the market
-	var glow := OmniLight3D.new()
-	glow.light_color  = Color(1.0, 0.9, 0.35)
-	glow.light_energy = 1.5
-	glow.omni_range   = 4.0
-	glow.position     = Vector3(0.0, 0.8, 0.0)
-	area.add_child(glow)
-
-	# Add to scene root (so transforms are in world space)
-	get_parent().add_child(area)
-	area.global_position = target.global_position
-
-	# Track per-item collected state
-	var done := false
-
-	area.body_entered.connect(func(body: Node3D) -> void:
-		if done or not (body is CharacterBody3D):
-			return
-		done = true
-		area.set_deferred("monitoring", false)
-
-		# Hide the actual market asset
-		target.hide()
-
-		# Tell the game manager
-		var gm: Node = get_node_or_null("/root/GameModeManager")
-		if gm:
-			gm.collect_item(item_id)
-
-		# Small pop animation then remove the zone
-		var tw := area.create_tween()
-		tw.set_parallel(true)
-		tw.tween_property(area, "scale", Vector3.ZERO, 0.3).set_ease(Tween.EASE_IN)
-		tw.tween_callback(area.queue_free).set_delay(0.31)
-	)
+# ── Safe Floor Aisle Drops ───────────────────────────────
+func _generate_safe_aisle_points(arr: Array[Vector3]) -> void:
+	var npcs = get_node_or_null("../GameNPCs")
+	if not npcs: return
+	
+	# The GameNPCs act strictly as pathfinding constraints located beautifully inside clear aisles!
+	var anchors = []
+	for npc in npcs.get_children():
+		if npc is Node3D:
+			anchors.append(npc.global_position)
+			
+	for anchor in anchors:
+		# Scatter dynamically 1.2m spacing off nodes
+		var pts = [
+			Vector3(anchor.x, 0.4, anchor.z),
+			Vector3(anchor.x + 1.2, 0.4, anchor.z + 1.2),
+			Vector3(anchor.x - 1.2, 0.4, anchor.z - 1.2),
+			Vector3(anchor.x + 1.2, 0.4, anchor.z - 1.2),
+			Vector3(anchor.x - 1.2, 0.4, anchor.z + 1.2)
+		]
+		
+		# Safely boundary clamp each calculated spot
+		for pt in pts:
+			pt.x = clamp(pt.x, -31.0, -5.0)
+			pt.z = clamp(pt.z, -43.0, -6.0)
+			arr.append(pt)

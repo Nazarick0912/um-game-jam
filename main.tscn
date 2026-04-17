@@ -77,8 +77,8 @@
 [ext_resource type="ArrayMesh" uid="uid://b7w7pijhvdj3o" path="res://Kitchen Asset/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/pot_A.obj" id="74_ppx11"]
 [ext_resource type="ArrayMesh" uid="uid://h0owroyedygl" path="res://Kitchen Asset/KayKit_Restaurant_Bits_1.0_FREE/Assets/obj/pot_large.obj" id="75_1yv1y"]
 [ext_resource type="PackedScene" uid="uid://bgcc57327j1b3" path="res://Character_System/Customer.tscn" id="80_npc"]
-[ext_resource type="Script" uid="uid://gitemspawner1" path="res://GameItemSpawner.gd" id="81_spawner"]
-[ext_resource type="Script" uid="uid://shoppinghud01" path="res://ShoppingHUD.gd" id="82_hud"]
+[ext_resource type="Script" uid="uid://cnfi1qr1dgi1a" path="res://GameItemSpawner.gd" id="81_spawner"]
+[ext_resource type="Script" uid="uid://c018dayf71uyy" path="res://ShoppingHUD.gd" id="82_hud"]
 
 [sub_resource type="Environment" id="Environment_gngh3"]
 background_mode = 1
@@ -1381,25 +1381,25 @@ transform = Transform3D(0.68064445, 0, 0.19129488, 0, 0.5532051, 0, -0.18753444,
 [node name="train_tender_presents_A2" parent="Assets/Item" unique_id=621056951 instance=ExtResource("36_e71vb")]
 transform = Transform3D(1.2243133, 0, -1.1519257, 0, 1.1257838, 0, 0.94884986, 0, 1.4284824, -0.29277992, -1.5217649, -25.353611)
 
-[node name="ShoppingHUD" type="CanvasLayer" parent="." unique_id=2200000001]
+[node name="ShoppingHUD" type="CanvasLayer" parent="." unique_id=-2094967295]
 script = ExtResource("82_hud")
 
-[node name="GameNPCs" type="Node3D" parent="." unique_id=2200000002]
+[node name="GameNPCs" type="Node3D" parent="." unique_id=-2094967294]
 
-[node name="Customer1" parent="GameNPCs" unique_id=2200000003 instance=ExtResource("80_npc")]
+[node name="Customer1" parent="GameNPCs" unique_id=-2094967293 instance=ExtResource("80_npc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0.1, -38)
 
-[node name="Customer2" parent="GameNPCs" unique_id=2200000004 instance=ExtResource("80_npc")]
+[node name="Customer2" parent="GameNPCs" unique_id=-2094967292 instance=ExtResource("80_npc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0.1, -43)
 
-[node name="Customer3" parent="GameNPCs" unique_id=2200000005 instance=ExtResource("80_npc")]
+[node name="Customer3" parent="GameNPCs" unique_id=-2094967291 instance=ExtResource("80_npc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0.1, -30)
 
-[node name="Customer4" parent="GameNPCs" unique_id=2200000006 instance=ExtResource("80_npc")]
+[node name="Customer4" parent="GameNPCs" unique_id=-2094967290 instance=ExtResource("80_npc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.1, -46)
 
-[node name="Customer5" parent="GameNPCs" unique_id=2200000007 instance=ExtResource("80_npc")]
+[node name="Customer5" parent="GameNPCs" unique_id=-2094967289 instance=ExtResource("80_npc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0.1, -35)
 
-[node name="GameItemSpawner" type="Node" parent="." unique_id=2200000014]
+[node name="GameItemSpawner" type="Node" parent="." unique_id=-2094967282]
 script = ExtResource("81_spawner")
