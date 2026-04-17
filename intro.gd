@@ -88,7 +88,31 @@ func _apply_styles() -> void:
 		"2. Grab items using the Shopping Cart.\n" + \
 		"3. Avoid chaotic customers!\n\n" + \
 		"WIN CONDITION:\n" + \
-		"Fill your shopping bag with all items on your list before the timer runs out!"
+		"Fill your shopping bag with all items on your list before the timer runs out!\n" + \
+		"─────────────────────────────────────\n" + \
+		"Good luck and happy shopping! 🎁"
+	
+	# Style the rules dialog
+	var dialog_style := StyleBoxFlat.new()
+	dialog_style.bg_color                   = Color(0.10, 0.09, 0.22, 0.98)
+	dialog_style.border_color               = Color(0.75, 0.38, 0.10, 1.0)
+	dialog_style.border_width_left          = 2
+	dialog_style.border_width_right         = 2
+	dialog_style.border_width_top           = 2
+	dialog_style.border_width_bottom        = 2
+	dialog_style.corner_radius_top_left     = 16
+	dialog_style.corner_radius_top_right    = 16
+	dialog_style.corner_radius_bottom_left  = 16
+	dialog_style.corner_radius_bottom_right = 16
+	dialog_style.content_margin_left        = 32
+	dialog_style.content_margin_right       = 32
+	dialog_style.content_margin_top         = 24
+	dialog_style.content_margin_bottom      = 24
+	rules_dialog.add_theme_stylebox_override("panel", dialog_style)
+	
+	# Style the dialog text
+	rules_dialog.add_theme_font_size_override("font_size", 16)
+	rules_dialog.add_theme_color_override("font_color", Color(0.88, 0.88, 0.95, 1.0))
 
 	var help_style := StyleBoxFlat.new()
 	help_style.bg_color = Color(0.2, 0.2, 0.4, 0.8)
