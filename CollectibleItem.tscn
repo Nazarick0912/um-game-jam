@@ -3,25 +3,25 @@
 [ext_resource type="Script" uid="uid://citem001gd" path="res://CollectibleItem.gd" id="1_citem"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_ci"]
-radius = 0.75
+radius = 0.39409494
 
 [sub_resource type="SphereMesh" id="SphereMesh_ci"]
 radius = 0.38
 height = 0.76
 
-[node name="CollectibleItem" type="Area3D"]
+[node name="CollectibleItem" type="Area3D" unique_id=766767088]
 script = ExtResource("1_citem")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=269851430]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37111056, 0)
 shape = SubResource("SphereShape3D_ci")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=562344631]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.38, 0)
 mesh = SubResource("SphereMesh_ci")
 
-[node name="Label3D" type="Label3D" parent="."]
+[node name="Label3D" type="Label3D" parent="." unique_id=569287206]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0)
+no_depth_test = true
 text = "Item"
 font_size = 52
-billboard = 3
-no_depth_test = true

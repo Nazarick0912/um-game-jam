@@ -23,7 +23,7 @@ var sway_phase: float = 0.0
 @onready var camera = $CameraPivot/Camera3D 
 
 # Ensure this path matches your UI location in the Scene Tree
-@onready var timer_text_edit = get_node_or_null("../TextEdit")
+@onready var timer_text_edit = get_node_or_null("%TimerText")
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -68,16 +68,17 @@ func _physics_process(delta: float) -> void:
 		velocity.z = direction.z * SPEED
 		
 		# Rotate Knight to face movement direction
-		var target_angle = atan2(input_dir.x, input_dir.y)
-		visual_model.rotation.y = lerp_angle(visual_model.rotation.y, target_angle, TURN_SPEED * delta)
+		if is_instance_valid(visual_model):
+			var target_angle = atan2(input_dir.x, input_dir.y)
+			visual_model.rotation.y = lerp_angle(visual_model.rotation.y, target_angle, TURN_SPEED * delta)
 		
-		if anim_player.current_animation != "Rig_Medium_MovementBasic/Running_A":
+		if is_instance_valid(anim_player) and anim_player.current_animation != "Rig_Medium_MovementBasic/Running_A":
 			anim_player.play("Rig_Medium_MovementBasic/Running_A")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		
-		if anim_player.current_animation != "Rig_Medium_MovementBasic/Jump_Idle":
+		if is_instance_valid(anim_player) and anim_player.current_animation != "Rig_Medium_MovementBasic/Jump_Idle":
 			anim_player.play("Rig_Medium_MovementBasic/Jump_Idle")
 
 	move_and_slide()
@@ -97,8 +98,9 @@ func _physics_process(delta: float) -> void:
 	sway_phase += delta * current_speed
 	var sway_angle = sin(sway_phase) * current_amplitude
 
-	camera.rotation_degrees.y = sway_angle
-	camera.rotation_degrees.z = sway_angle
+	if is_instance_valid(camera):
+		camera.rotation_degrees.y = sway_angle
+		camera.rotation_degrees.z = sway_angle
 
 	# --- 4. UI Update & Game Over ---
 	var time_left = max(TOTAL_TIME - play_time_passed, 0.0)

@@ -49,6 +49,7 @@ func _ready() -> void:
 	_pick_new_direction()
 
 func _physics_process(delta: float) -> void:
+	if not is_inside_tree(): return
 	_dir_timer -= delta
 	if _dir_timer <= 0.0:
 		_pick_new_direction()

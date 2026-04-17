@@ -38,7 +38,16 @@ var _model: Node3D = null
 var skip_asset_load: bool = false
 var external_mesh_to_steal: Node3D = null
 
+var use_spawn_pos: bool = false
+var spawn_global_pos: Vector3 = Vector3.ZERO
+
 func _ready() -> void:
+	# Force Global Scale of (1, 1, 1) and break away from parent scales
+	top_level = true
+	
+	if use_spawn_pos:
+		global_position = spawn_global_pos
+
 	body_entered.connect(_on_body_entered)
 	add_to_group("collectible_item")
 
@@ -106,9 +115,6 @@ func _do_collect() -> void:
 	if gm:
 		gm.collect_item(item_id)
 
-	# Pop animation then free
-	var tw := create_tween()
-	tw.set_parallel(true)
-	tw.tween_property(self, "global_position:y", global_position.y + 0.8, 0.25).set_ease(Tween.EASE_OUT)
-	tw.tween_property(self, "scale", Vector3.ZERO, 0.25).set_ease(Tween.EASE_IN)
-	tw.tween_callback(queue_free).set_delay(0.26)
+	# Pop animation removed: Disable physics and processing immediately to avoid singular transforms
+	process_mode = Node.PROCESS_MODE_DISABLED
+	queue_free()
