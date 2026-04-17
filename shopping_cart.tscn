@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://brdunt3ij2tyb"]
+
+[ext_resource type="Script" uid="uid://vhl8ocky5in7" path="res://shopping_cart.gd" id="1_sc"]
+[ext_resource type="PackedScene" uid="uid://htds7c0vy132" path="res://Mart Asset/Models/FBX format/shopping-cart.fbx" id="2_xuqvo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cart"]
+size = Vector3(0.1, 0.1, 0.1)
+
+[node name="ShoppingCart" type="CharacterBody3D" unique_id=29632881]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("1_sc")
+
+[node name="shopping-cart" parent="." unique_id=1790220572 instance=ExtResource("2_xuqvo")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1874588266]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("BoxShape3D_cart")
