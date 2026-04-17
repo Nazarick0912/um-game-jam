@@ -1,0 +1,113 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" uid="uid://pvwrbxnienk4" path="res://intro.gd" id="1_intro"]
+
+[node name="Intro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_intro")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.098, 0.075, 0.165, 1.0)
+
+[node name="SnowflakeLayer" type="Node2D" parent="."]
+
+[node name="CardShadow" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_left = -328.0
+offset_top = -214.0
+offset_right = 328.0
+offset_bottom = 214.0
+color = Color(0.0, 0.0, 0.0, 0.55)
+
+[node name="Card" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+offset_left = -320.0
+offset_top = -206.0
+offset_right = 320.0
+offset_bottom = 206.0
+
+[node name="VBox" type="VBoxContainer" parent="Card"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TitleLabel" type="Label" parent="Card/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "MARKET MADNESS"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="Card/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "🎄  A Festive Shopping Frenzy  🎄"
+horizontal_alignment = 1
+
+[node name="Separator" type="HSeparator" parent="Card/VBox"]
+layout_mode = 2
+
+[node name="DescLabel" type="Label" parent="Card/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Navigate the bustling holiday market.
+Grab items, avoid the crowds, reach the checkout!"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="Spacer" type="Control" parent="Card/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 16)
+
+[node name="StartButton" type="Button" parent="Card/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "▶  START GAME"
+
+[node name="Spacer2" type="Control" parent="Card/VBox"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 4)
+
+[node name="HintLabel" type="Label" parent="Card/VBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Press  Enter  or click the button to begin"
+horizontal_alignment = 1
+
+[node name="FooterLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.0
+anchor_top = 1.0
+anchor_right = 0.0
+anchor_bottom = 1.0
+grow_vertical = 0
+offset_left = 16.0
+offset_top = -44.0
+offset_right = 240.0
+offset_bottom = -10.0
+text = "🛒  UM Game Jam • 2026"

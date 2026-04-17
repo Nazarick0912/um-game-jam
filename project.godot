@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="UMGameJam"
-run/main_scene="uid://7revc4w3mb7l"
+run/main_scene="res://intro.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 
 [input]
