@@ -78,7 +78,7 @@
 [ext_resource type="PackedScene" uid="uid://bgcc57327j1b3" path="res://Character_System/Customer.tscn" id="80_npc"]
 [ext_resource type="Script" uid="uid://cnfi1qr1dgi1a" path="res://GameItemSpawner.gd" id="81_spawner"]
 [ext_resource type="Script" uid="uid://c018dayf71uyy" path="res://ShoppingHUD.gd" id="82_hud"]
-[ext_resource type="PackedScene" uid="uid://b00pl356frv7" path="res://shopping_cart.tscn" id="83_tscn"]
+[ext_resource type="PackedScene" uid="uid://brdunt3ij2tyb" path="res://shopping_cart.tscn" id="83_tscn"]
 
 [sub_resource type="Environment" id="Environment_gngh3"]
 background_mode = 1
@@ -532,6 +532,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21213531, 0.2584535, 3.892
 [node name="shopping-cart" parent="Assets/Market Assets" unique_id=964275186 instance=ExtResource("83_tscn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29053497, -3.5762787e-07, 3.1495476)
 collision_mask = 7
+platform_wall_layers = 3
 
 [node name="shopping-cart2" parent="Assets/Market Assets" unique_id=318572948 instance=ExtResource("83_tscn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.29053497, -3.5762787e-07, 3.3234477)
