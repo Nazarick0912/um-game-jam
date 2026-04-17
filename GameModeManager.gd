@@ -35,7 +35,18 @@ func _reset_list() -> void:
 		{ "id": "bowl",       "label": "🥣 Bowl" },
 		{ "id": "knife",      "label": "🔪 Knife" },
 		{ "id": "box",        "label": "📦 Box" },
-		{ "id": "bread",      "label": "🍞 Bread" }
+		{ "id": "bread",      "label": "🍞 Bread" },
+		{ "id": "fruit",      "label": "🍓 Fruit" },
+		{ "id": "carrots",    "label": "🥕 Carrots" },
+		{ "id": "cheese",     "label": "🧀 Cheese" },
+		{ "id": "plate",      "label": "🍽️ Plate" },
+		{ "id": "burger",     "label": "🍔 Burger" },
+		{ "id": "stew",       "label": "🍲 Stew" },
+		{ "id": "basketball", "label": "🏀 Basketball" },
+		{ "id": "ham",        "label": "🍖 Ham" },
+		{ "id": "tomatoes",   "label": "🍅 Tomatoes" },
+		{ "id": "onions",     "label": "🧅 Onions" },
+		{ "id": "potatoes",   "label": "🥔 Potatoes" }
 	]
 	
 	# Scramble the list

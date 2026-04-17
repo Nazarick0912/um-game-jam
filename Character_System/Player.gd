@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 # --- Physical Constants ---
 @export var SPEED = 5.0
-@export var JUMP_VELOCITY = 4.5
+@export var JUMP_VELOCITY = 6.5
 @export var TURN_SPEED = 12.0
 @export var MOUSE_SENSITIVITY = 0.001
 

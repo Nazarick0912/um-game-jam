@@ -5,7 +5,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://bgq77gqqd3klc" path="res://Character_System/Rig_Medium_MovementBasic.glb" id="3_kne1u"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q07pd"]
-radius = 0.9970703
+radius = 0.6
 height = 2.6672363
 
 [node name="Player" type="CharacterBody3D" unique_id=506474146]
@@ -19,7 +19,7 @@ shape = SubResource("CapsuleShape3D_q07pd")
 
 [node name="Knight" parent="." unique_id=261265994 instance=ExtResource("2_kne1u")]
 
-[node name="Skeleton3D" parent="Knight/Rig_Medium" parent_id_path=PackedInt32Array(261265994, 2047537895) index="0" unique_id=636874165]
+[node name="Skeleton3D" parent="Knight/Rig_Medium" parent_id_path=PackedInt32Array(261265994, 610399639) index="0" unique_id=1303877076]
 bones/1/position = Vector3(0, 0.39206383, 0)
 bones/4/rotation = Quaternion(-0.58795244, -0.10844585, -0.645398, 0.47540814)
 bones/5/rotation = Quaternion(2.1184832e-08, -5.03675e-08, -0.4973854, 0.86752975)

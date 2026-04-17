@@ -36,7 +36,18 @@ func _spawn_mapped_items() -> void:
 		"pan": {"match": "pan", "offset": 0.6},
 		"papertowel": {"match": "papertowel", "offset": 0.5},
 		"box": {"match": "box", "offset": 0.6},
-		"bread": {"match": "display-bread", "offset": 1.2}
+		"bread": {"match": "display-bread", "offset": 1.2},
+		"fruit": {"match": "display-fruit", "offset": 1.2},
+		"carrots": {"match": "crate_carrots", "offset": 0.6},
+		"cheese": {"match": "crate_cheese", "offset": 0.6},
+		"plate": {"match": "plate", "offset": 0.4},
+		"burger": {"match": "burger", "offset": 0.5},
+		"stew": {"match": "stew", "offset": 0.5},
+		"basketball": {"match": "basketball", "offset": 0.5},
+		"ham": {"match": "crate_ham", "offset": 0.6},
+		"tomatoes": {"match": "crate_tomatoes", "offset": 0.6},
+		"onions": {"match": "crate_onions", "offset": 0.6},
+		"potatoes": {"match": "crate_potatoes", "offset": 0.6}
 	}
 	
 	var candidate_map = {}
