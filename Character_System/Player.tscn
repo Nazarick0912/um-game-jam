@@ -6,15 +6,15 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_q07pd"]
 radius = 0.9970703
-height = 2.6672363
+height = 2.5235596
 
-[node name="Player" type="CharacterBody3D" unique_id=506474146]
+[node name="Player" type="CharacterBody3D" unique_id=506474146 groups=["player"]]
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_kpjcp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=391470997]
-transform = Transform3D(0.99999964, -0.00072576606, 0.00045198307, 0.0007259344, 0.9999997, -0.00039637974, -0.0004517127, 0.00039668783, 0.9999998, 0.02523256, 1.3157653, -0.0008478601)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
 shape = SubResource("CapsuleShape3D_q07pd")
 
 [node name="Knight" parent="." unique_id=261265994 instance=ExtResource("2_kne1u")]

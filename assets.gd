@@ -3,6 +3,8 @@ extends Node3D
 func _ready():
 	# Loop through every item in the Market Assets folder
 	for item in get_children():
+		if item.is_in_group("carts") or item.name.contains("shopping-cart"):
+			continue # Skip these, they handle their own collision
 		generate_collision(item)
 
 func generate_collision(node):

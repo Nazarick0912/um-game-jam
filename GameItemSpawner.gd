@@ -100,13 +100,13 @@ func _create_pickup_zone(
 	get_parent().add_child(area)
 	area.global_position = target.global_position
 
-	# Track per-item collected state
-	var done := false
+	# Track per-item collected state (using a dictionary so it can be modified inside the lambda)
+	var state := {"done": false}
 
 	area.body_entered.connect(func(body: Node3D) -> void:
-		if done or not (body is CharacterBody3D):
+		if state["done"] or not (body is CharacterBody3D):
 			return
-		done = true
+		state["done"] = true
 		area.set_deferred("monitoring", false)
 
 		# Hide the actual market asset
