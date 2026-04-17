@@ -16,8 +16,31 @@ var shopping_list: Dictionary = {}
 var _game_active: bool = false
 var _game_ended:  bool = false
 
+# Global Audio Stream Players
+var bgm_player: AudioStreamPlayer
+var pickup_player: AudioStreamPlayer
+var lose_player: AudioStreamPlayer
+
 # ── Lifecycle ────────────────────────────────────────────
 func _ready() -> void:
+	# --- AUDIO SETUP ---
+	bgm_player = AudioStreamPlayer.new()
+	var bgm_stream = load("res://Assets 1/KayKit_Prototype_Bits_1.1_FREE/Music/Zambolino - Reflection (freetouse.com).ogg") as AudioStreamOggVorbis
+	if bgm_stream:
+		bgm_stream.loop = true
+	bgm_player.stream = bgm_stream
+	bgm_player.volume_db = -12.0
+	bgm_player.autoplay = true
+	add_child(bgm_player)
+	
+	pickup_player = AudioStreamPlayer.new()
+	pickup_player.stream = load("res://Assets 1/KayKit_Prototype_Bits_1.1_FREE/Music/Chaching.ogg")
+	add_child(pickup_player)
+	
+	lose_player = AudioStreamPlayer.new()
+	lose_player.stream = load("res://Assets 1/KayKit_Prototype_Bits_1.1_FREE/Music/Lose2.ogg")
+	add_child(lose_player)
+
 	_reset_list()
 
 func _reset_list() -> void:
@@ -75,6 +98,8 @@ func collect_item(item_id: String) -> void:
 		var entry: Dictionary = shopping_list[item_id]
 		if entry["collected"] < entry["required"]:
 			entry["collected"] += 1
+			if pickup_player:
+				pickup_player.play()
 			emit_signal("list_updated")
 			_check_win()
 
@@ -92,6 +117,10 @@ func notify_time_up() -> void:
 	if not _game_ended:
 		_game_ended  = true
 		_game_active = false
+		if bgm_player:
+			bgm_player.stop()
+		if lose_player:
+			lose_player.play()
 		emit_signal("game_lost")
 
 # ── Helpers ──────────────────────────────────────────────

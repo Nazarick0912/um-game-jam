@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://cgfsg3xg2b458"
+path="res://.godot/imported/Hey watch it.ogg-d44de01c82a7e9b15d141a6e372c6ef4.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets 1/KayKit_Prototype_Bits_1.1_FREE/Music/Hey watch it.ogg"
+dest_files=["res://.godot/imported/Hey watch it.ogg-d44de01c82a7e9b15d141a6e372c6ef4.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
