@@ -1059,7 +1059,7 @@ transform = Transform3D(1.5887865, 0, 0, 0, 1.8425233, 0, 0, 0, 1.6712654, -4.81
 transform = Transform3D(1.5887865, 0, 0, 0, 3.0785205, 0, 0, 0, 2.8731027, -4.817404, -1.4722307, 13.90034)
 
 [node name="Box_B2" parent="Assets/Item" unique_id=194670832 instance=ExtResource("62_phcyf")]
-transform = Transform3D(0.7070153, 0, 0, 0, 0.41507378, 0.36571792, 0, -0.45821214, 0.52005064, -4.438259, -0.19992137, 12.249651)
+transform = Transform3D(1.4, 0, 0, 0, 1.2, 0, 0, 0, 1.4, -1.3440218, -1.5217655, 2.5942967)
 
 [node name="Box_C6" parent="Assets/Item" unique_id=1682638334 instance=ExtResource("61_5dllo")]
 transform = Transform3D(0.53527963, 0, 0.2144675, 0, 0.35738274, 0, -0.45281443, 0, 0.24365613, -4.8984213, -0.19344532, 11.738676)
