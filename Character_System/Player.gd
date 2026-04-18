@@ -155,9 +155,20 @@ func _physics_process(delta: float) -> void:
 		if is_instance_valid(anim_player) and anim_player.current_animation != "Rig_Medium_MovementBasic/Running_A":
 			anim_player.play("Rig_Medium_MovementBasic/Running_A")
 	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-		is_sprinting = false # Reset sprint when movement stops
+		# --- Inertia Slide Logic ---
+		var friction = SPEED * 20.0 # Default snappy stop
+		
+		# If we were sprinting with a cart, slide a bit
+		if is_sprinting and attached_cart != null:
+			friction = 12.0 # Calculated friction for ~3m slide from 8.5m/s
+			
+		velocity.x = move_toward(velocity.x, 0, friction * delta)
+		velocity.z = move_toward(velocity.z, 0, friction * delta)
+		
+		# Reset sprint only when nearly stopped
+		if velocity.length() < 0.1:
+			is_sprinting = false
+		
 		if is_instance_valid(anim_player) and anim_player.current_animation != "Rig_Medium_MovementBasic/Jump_Idle":
 			anim_player.play("Rig_Medium_MovementBasic/Jump_Idle")
 
