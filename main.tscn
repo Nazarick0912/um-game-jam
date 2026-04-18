@@ -1455,13 +1455,77 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0.1, -38)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0.1, -43)
 
 [node name="Customer3" parent="GameNPCs" unique_id=-2094967291 instance=ExtResource("80_npc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.055851, 0.1, -30)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0.1, -30)
 
 [node name="Customer4" parent="GameNPCs" unique_id=-2094967290 instance=ExtResource("80_npc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.1, -46)
 
 [node name="Customer5" parent="GameNPCs" unique_id=-2094967289 instance=ExtResource("80_npc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.452002, 0.1, -40.003036)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0.1, -40)
+
+[node name="Customer6" parent="GameNPCs" unique_id=-2094967306 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.1, -35)
+
+[node name="Customer7" parent="GameNPCs" unique_id=-2094967307 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0.1, -25)
+
+[node name="Customer8" parent="GameNPCs" unique_id=-2094967308 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.1, -42)
+
+[node name="Customer9" parent="GameNPCs" unique_id=-2094967309 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0.1, -32)
+
+[node name="Customer10" parent="GameNPCs" unique_id=-2094967310 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25, 0.1, -22)
+
+[node name="Customer11" parent="GameNPCs" unique_id=-2094967311 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.1, -15)
+
+[node name="Customer12" parent="GameNPCs" unique_id=-2094967312 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0.1, -45)
+
+[node name="Customer13" parent="GameNPCs" unique_id=-2094967313 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.1, -48)
+
+[node name="Customer14" parent="GameNPCs" unique_id=-2094967314 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 0.1, -20)
+
+[node name="Customer15" parent="GameNPCs" unique_id=-2094967315 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0.1, -10)
+
+[node name="Customer16" parent="GameNPCs" unique_id=-2094967316 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0.1, -12)
+
+[node name="Customer17" parent="GameNPCs" unique_id=-2094967317 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0.1, -28)
+
+[node name="Customer18" parent="GameNPCs" unique_id=-2094967318 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28, 0.1, -40)
+
+[node name="Customer19" parent="GameNPCs" unique_id=-2094967319 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, 0.1, -15)
+
+[node name="Customer20" parent="GameNPCs" unique_id=-2094967320 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.1, -52)
+
+[node name="Customer21" parent="GameNPCs" unique_id=-2094967321 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0.1, -54)
+
+[node name="Customer22" parent="GameNPCs" unique_id=-2094967322 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0.1, -50)
+
+[node name="Customer23" parent="GameNPCs" unique_id=-2094967323 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.1, -8)
+
+[node name="Customer24" parent="GameNPCs" unique_id=-2094967324 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.1, -30)
+
+[node name="Customer25" parent="GameNPCs" unique_id=-2094967325 instance=ExtResource("80_npc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0.1, -54)
+
+
+
+
 
 [node name="GameItemSpawner" type="Node" parent="." unique_id=-2094967282]
 script = ExtResource("81_spawner")
