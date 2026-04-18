@@ -212,7 +212,7 @@ func _physics_process(delta: float) -> void:
 		# If we were sprinting with a cart, slide a bit
 		if is_sprinting and attached_cart != null:
 			is_sliding = true
-			friction = 6.0 # Calculated friction for ~3m slide from 8.5m/s
+			friction = 10.0 # Calculated friction for ~3m slide from 8.5m/s
 			
 		velocity.x = move_toward(velocity.x, 0, friction * delta)
 		velocity.z = move_toward(velocity.z, 0, friction * delta)

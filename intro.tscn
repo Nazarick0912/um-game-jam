@@ -65,7 +65,7 @@ horizontal_alignment = 1
 [node name="SubtitleLabel" type="Label" parent="Card/VBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "🎄  A Festive Shopping Frenzy  🎄"
+text = "🛒  A Chaotic Shopping Frenzy  🛒"
 horizontal_alignment = 1
 
 [node name="Separator" type="HSeparator" parent="Card/VBox"]
@@ -74,8 +74,8 @@ layout_mode = 2
 [node name="DescLabel" type="Label" parent="Card/VBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Navigate the bustling holiday market.
-Grab items, avoid the crowds, reach the checkout!"
+text = "Grab every item on your list and reach the checkout!
+Sprint, dodge, collect — before the clock hits zero!"
 horizontal_alignment = 1
 autowrap_mode = 3
 
@@ -86,7 +86,7 @@ custom_minimum_size = Vector2(0, 16)
 [node name="StartButton" type="Button" parent="Card/VBox"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "▶  START GAME"
+text = "🛒  START SHOPPING!"
 
 [node name="Spacer2" type="Control" parent="Card/VBox"]
 layout_mode = 2
@@ -95,7 +95,7 @@ custom_minimum_size = Vector2(0, 4)
 [node name="HintLabel" type="Label" parent="Card/VBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-text = "Press  Enter  or click the button to begin"
+text = "Press  Enter  or click to begin"
 horizontal_alignment = 1
 
 [node name="FooterLabel" type="Label" parent="."]
