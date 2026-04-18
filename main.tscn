@@ -79,6 +79,7 @@
 [ext_resource type="PackedScene" uid="uid://bgcc57327j1b3" path="res://Character_System/Customer.tscn" id="80_npc"]
 [ext_resource type="Script" uid="uid://cnfi1qr1dgi1a" path="res://GameItemSpawner.gd" id="81_spawner"]
 [ext_resource type="Script" uid="uid://c018dayf71uyy" path="res://ShoppingHUD.gd" id="82_hud"]
+[ext_resource type="Shader" uid="uid://cnb6y4j1o3p56" path="res://wavy_floor.gdshader" id="83_wavy"]
 
 [sub_resource type="Environment" id="Environment_gngh3"]
 background_mode = 1
@@ -89,8 +90,11 @@ tonemap_white = 50.0
 ssao_enabled = true
 ssil_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qsp4k"]
-albedo_texture = ExtResource("1_vivmo")
+[sub_resource type="ShaderMaterial" id="StandardMaterial3D_qsp4k"]
+shader = ExtResource("83_wavy")
+shader_parameter/albedo_texture = ExtResource("1_vivmo")
+shader_parameter/wave_intensity = 0.0
+shader_parameter/time = 0.0
 
 [node name="Main" type="Node3D" unique_id=982590133]
 

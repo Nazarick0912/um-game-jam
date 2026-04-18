@@ -34,7 +34,6 @@ var is_fatigued = false
 @export var TOTAL_TIME = 60.0
 var play_time_passed: float = 0.0
 var sway_phase: float = 0.0
-var _was_moving: bool = false
 var _hey_played: bool = false
 
 var move_sfx_player: AudioStreamPlayer
@@ -217,6 +216,24 @@ func _physics_process(delta: float) -> void:
 		
 		if is_instance_valid(anim_player) and anim_player.current_animation != "Rig_Medium_MovementBasic/Jump_Idle":
 			anim_player.play("Rig_Medium_MovementBasic/Jump_Idle")
+
+	# --- Wavy Floor Effect Update ---
+	var floor_container = get_parent().get_node_or_null("FLOOR")
+	if is_instance_valid(floor_container):
+		var intensity = clamp(play_time_passed / TOTAL_TIME, 0.0, 1.0) * 1.5
+		for f in floor_container.get_children():
+			if f is CSGBox3D and f.material_override is ShaderMaterial:
+				f.material_override.set_shader_parameter("wave_intensity", intensity)
+				f.material_override.set_shader_parameter("time", play_time_passed)
+
+	# --- Drunken Camera Sway ---
+	if is_instance_valid(camera):
+		var sway_speed = 1.0 # Slow, rhythmic sway
+		var max_sway = 30.0 # From your request
+		var sway_intensity = (play_time_passed / TOTAL_TIME) * max_sway
+		var sway_val = sin(play_time_passed * sway_speed) * sway_intensity
+		# -25.0 is the base Y rotation from your screenshot
+		camera.rotation_degrees.y = -25.0 + sway_val
 
 	move_and_slide()
 
