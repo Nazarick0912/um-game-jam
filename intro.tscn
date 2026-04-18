@@ -1,6 +1,7 @@
-[gd_scene format=3]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" uid="uid://pvwrbxnienk4" path="res://intro.gd" id="1_intro"]
+[ext_resource type="Script" path="res://intro.gd" id="1_intro"]
+[ext_resource type="Texture2D" path="res://intro_bg.png" id="2_bg"]
 
 [node name="Intro" type="Control"]
 layout_mode = 3
@@ -11,7 +12,19 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_intro")
 
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+
 [node name="Background" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -101,13 +114,15 @@ horizontal_alignment = 1
 [node name="FooterLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 7
-anchor_left = 0.0
+anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 0.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-grow_vertical = 0
-offset_left = 16.0
+offset_left = -112.0
 offset_top = -44.0
-offset_right = 240.0
+offset_right = 112.0
 offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 0
 text = "🛒  UM Game Jam • 2026"
+horizontal_alignment = 1

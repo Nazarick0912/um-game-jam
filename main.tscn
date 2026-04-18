@@ -81,6 +81,7 @@
 [ext_resource type="Script" uid="uid://c018dayf71uyy" path="res://ShoppingHUD.gd" id="82_hud"]
 [ext_resource type="Shader" path="res://wavy_floor.gdshader" id="83_wavy"]
 [ext_resource type="Script" uid="uid://cetwdb67kcx5t" path="res://InstructionSign.gd" id="InstructionSign_res"]
+[ext_resource type="Script" uid="uid://o5sdjtwyr0xv" path="res://SunCycle.gd" id="84_sun"]
 
 [sub_resource type="Environment" id="Environment_gngh3"]
 background_mode = 1
@@ -183,6 +184,7 @@ offset_bottom = -3.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=380161797]
 transform = Transform3D(-0.07330785, 0.9858323, -0.15086702, 0.44475833, 0.16771433, 0.8798082, 0.8926457, -0.0026025104, -0.450752, -5.297562, 36.773754, -43.453648)
+script = ExtResource("84_sun")
 shadow_enabled = true
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=1491237489]
