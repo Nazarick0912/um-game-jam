@@ -102,8 +102,28 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if _collected:
 		return
-	# The Player is a CharacterBody3D – only one in scene, so type-check works
+		
+	# The Player is a CharacterBody3D
 	if body is CharacterBody3D:
+		# 1. Check if the player is currently pushing a cart
+		if body.attached_cart == null:
+			# Player must be pushing a cart to shop
+			return
+			
+		# 2. Check if the item is actually on the shopping list
+		var gm := get_node_or_null("/root/GameModeManager")
+		if gm:
+			if not (item_id in gm.shopping_list):
+				# Item not on the list
+				return
+			
+			# Check if we still need more of this item
+			var entry = gm.shopping_list[item_id]
+			if entry["collected"] >= entry["required"]:
+				# Already have enough of this item
+				return
+				
+		# All conditions met, collect it!
 		_do_collect()
 
 func _do_collect() -> void:
