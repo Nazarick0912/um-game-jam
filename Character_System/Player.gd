@@ -186,7 +186,7 @@ func _physics_process(delta: float) -> void:
 		# --- Fatigue Exertion ---
 		if attached_cart != null and is_sprinting:
 			push_time += delta
-			if push_time >= 5.0:
+			if push_time >= 3.5:
 				is_fatigued = true
 				push_time = 0.0
 				fatigue_timer = 0.5

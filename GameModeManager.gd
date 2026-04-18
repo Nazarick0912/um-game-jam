@@ -89,7 +89,7 @@ func _reset_list() -> void:
 	ALL_AVAILABLE.shuffle()
 	
 	# Pick between 3 to 6 unique items to find
-	var amount_to_pick = randi_range(3, 6)
+	var amount_to_pick = randi_range(5, 6)
 	var picked_items = ALL_AVAILABLE.slice(0, amount_to_pick)
 	
 	for item in picked_items:
