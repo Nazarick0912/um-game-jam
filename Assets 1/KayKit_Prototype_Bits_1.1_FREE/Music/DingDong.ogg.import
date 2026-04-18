@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bjgpeit13reo1"
+path="res://.godot/imported/DingDong.ogg-201bd35985cbcc77af4ecc133f406ae0.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets 1/KayKit_Prototype_Bits_1.1_FREE/Music/DingDong.ogg"
+dest_files=["res://.godot/imported/DingDong.ogg-201bd35985cbcc77af4ecc133f406ae0.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
