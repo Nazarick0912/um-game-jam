@@ -25,6 +25,6 @@ shape = SubResource("BoxShape3D_cart")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0, 0)
 visible = false
 billboard = 1
-text = "[P] Push Cart"
+text = "[E] Push Cart"
 font_size = 38
 outline_size = 12

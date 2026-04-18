@@ -86,8 +86,8 @@ func _input(event):
 			target_zoom += ZOOM_SPEED
 		target_zoom = clamp(target_zoom, MIN_ZOOM, MAX_ZOOM)
 
-	# 3. Toggle Grab (P key)
-	if event is InputEventKey and event.pressed and event.keycode == KEY_P:
+	# 3. Toggle Grab (E key)
+	if event is InputEventKey and event.pressed and event.keycode == KEY_E:
 		if attached_cart:
 			_detach_cart()
 		else:
@@ -245,8 +245,8 @@ func _physics_process(delta: float) -> void:
 
 	# --- Drunken Camera Sway ---
 	if is_instance_valid(camera):
-		var sway_speed = 1.0 # Slow, rhythmic sway
-		var max_sway = 30.0 # From your request
+		var sway_speed = 3.0 # Slow, rhythmic sway
+		var max_sway = 35.0 # From your request
 		var sway_intensity = (play_time_passed / TOTAL_TIME) * max_sway
 		var sway_val = sin(play_time_passed * sway_speed) * sway_intensity
 		# -25.0 is the base Y rotation from your screenshot
@@ -275,9 +275,9 @@ func _physics_process(delta: float) -> void:
 	var time_left = max(TOTAL_TIME - play_time_passed, 0.0)
 	# --- Nervous Camera Effect (Last 10 Seconds) ---
 	var pulse = 0.0
-	if time_left > 0 and time_left <= 10.0 and game_started:
+	if time_left > 0 and time_left <= 30.0 and game_started:
 		var nerv_speed = 20.0 # High frequency
-		var nerv_amount = 0.6 * (1.0 - (time_left / 10.0)) # Gets stronger as time runs out
+		var nerv_amount = 0.6 * (1.0 - (time_left / 30.0)) # Gets stronger as time runs out
 		pulse = sin(play_time_passed * nerv_speed) * nerv_amount
 	
 	if is_instance_valid(camera):

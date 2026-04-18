@@ -79,7 +79,7 @@
 [ext_resource type="PackedScene" uid="uid://bgcc57327j1b3" path="res://Character_System/Customer.tscn" id="80_npc"]
 [ext_resource type="Script" uid="uid://cnfi1qr1dgi1a" path="res://GameItemSpawner.gd" id="81_spawner"]
 [ext_resource type="Script" uid="uid://c018dayf71uyy" path="res://ShoppingHUD.gd" id="82_hud"]
-[ext_resource type="Shader" uid="uid://b30vm24a44or8" path="res://wavy_floor.gdshader" id="83_wavy"]
+[ext_resource type="Shader" path="res://wavy_floor.gdshader" id="83_wavy"]
 
 [sub_resource type="Environment" id="Environment_gngh3"]
 background_mode = 1
@@ -346,7 +346,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1684384, 0, 0.7780533)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7288723, -2.3841858e-07, 0.63362694)
 
 [node name="fence-door-rotate" parent="Assets/Market Assets" unique_id=514773445 instance=ExtResource("8_getpj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3524628, -2.3841858e-07, 0.96515274)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4732084, -2.3841858e-07, 0.96515274)
+
+[node name="fence-door-rotate2" parent="Assets/Market Assets" unique_id=216461966 instance=ExtResource("8_getpj")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.24156237, -2.3841858e-07, 0.5376577)
 
 [node name="freezer2" parent="Assets/Market Assets" unique_id=869364338 instance=ExtResource("9_ryguw")]
 transform = Transform3D(1.0950823, 0, 0, 0, 1.3354232, 0, 0, 0, 1, 7.388983, -2.3841858e-07, 3.9470696)
@@ -1375,7 +1378,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.055851, 0.1, -30)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.1, -46)
 
 [node name="Customer5" parent="GameNPCs" unique_id=-2094967289 instance=ExtResource("80_npc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 0.1, -35)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -30.452002, 0.1, -40.003036)
 
 [node name="GameItemSpawner" type="Node" parent="." unique_id=-2094967282]
 script = ExtResource("81_spawner")

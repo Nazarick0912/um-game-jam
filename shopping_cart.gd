@@ -40,7 +40,7 @@ func _physics_process(_delta: float):
 			hint.visible = false
 			return
 			
-		if dist < 3.0 and not is_grabbing and not Input.is_key_pressed(KEY_P):
+		if dist < 3.0 and not is_grabbing and not Input.is_key_pressed(KEY_E):
 			hint.visible = true
 		else:
 			hint.visible = false
