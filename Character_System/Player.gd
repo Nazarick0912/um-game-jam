@@ -24,6 +24,7 @@ var target_zoom = 4.0 # Initial camera distance
 var push_time = 0.0
 var fatigue_timer = 0.0
 var is_fatigued = false
+var _npc_collision_cooldown = 0.0
 
 var game_started = false
 var start_carpet = null
@@ -176,11 +177,7 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction.x * current_speed
 		velocity.z = direction.z * current_speed
 		
-		# Now it is correctly indented!
-		if not _hey_played:
-			_hey_played = true
-			if move_sfx_player:
-				move_sfx_player.play()
+		# Collision sound trigger with cooldown (moved to bottom after move_and_slide)
 
 
 		# --- Fatigue Exertion ---
@@ -269,6 +266,16 @@ func _physics_process(delta: float) -> void:
 					gm.do_checkout()
 
 	move_and_slide()
+	
+	# --- NPC Collision Sound Trigger ---
+	_npc_collision_cooldown -= delta
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider and collider.is_in_group("npc") and _npc_collision_cooldown <= 0.0:
+			if move_sfx_player:
+				move_sfx_player.play()
+				_npc_collision_cooldown = 2.0 # 2 second cooldown 
 
 	if game_started:
 		play_time_passed += delta
