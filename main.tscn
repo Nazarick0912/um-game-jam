@@ -79,7 +79,7 @@
 [ext_resource type="PackedScene" uid="uid://bgcc57327j1b3" path="res://Character_System/Customer.tscn" id="80_npc"]
 [ext_resource type="Script" uid="uid://cnfi1qr1dgi1a" path="res://GameItemSpawner.gd" id="81_spawner"]
 [ext_resource type="Script" uid="uid://c018dayf71uyy" path="res://ShoppingHUD.gd" id="82_hud"]
-[ext_resource type="Shader" uid="uid://cnb6y4j1o3p56" path="res://wavy_floor.gdshader" id="83_wavy"]
+[ext_resource type="Shader" path="res://wavy_floor.gdshader" id="83_wavy"]
 
 [sub_resource type="Environment" id="Environment_gngh3"]
 background_mode = 1
