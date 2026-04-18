@@ -1,7 +1,6 @@
 extends RigidBody3D
 
-@onready var hint = $InteractionHint
-
+static var has_learned_pushing = false
 var _player: Node3D = null
 
 func _ready():
@@ -23,16 +22,24 @@ func _ready():
 		# Fallback detection
 		_player = get_node_or_null("/root/main/Player")
 
+@onready var hint = $InteractionHint
+
 func _physics_process(_delta: float):
-	if freeze:
+	if freeze or has_learned_pushing:
+		if is_instance_valid(hint): hint.visible = false
 		return
 		
 	# Handle hint visibility based on distance
 	if is_instance_valid(hint) and is_instance_valid(_player):
 		var dist = global_position.distance_to(_player.global_position)
-		# Only show if close AND not already holding it
 		var is_grabbing = get_parent() == _player
 		
+		# Once grabbed for the first time, hide forever
+		if is_grabbing:
+			has_learned_pushing = true
+			hint.visible = false
+			return
+			
 		if dist < 3.0 and not is_grabbing and not Input.is_key_pressed(KEY_P):
 			hint.visible = true
 		else:
