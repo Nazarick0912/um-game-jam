@@ -2,9 +2,20 @@ extends CharacterBody3D
 
 # --- Physical Constants ---
 @export var SPEED = 5.0
+@export var SPRINT_SPEED = 8.5
 @export var JUMP_VELOCITY = 6.5
 @export var TURN_SPEED = 12.0
 @export var MOUSE_SENSITIVITY = 0.001
+
+# Double-tap to sprint variables
+var last_press_times = {
+	"ui_up": 0.0,
+	"ui_down": 0.0,
+	"ui_left": 0.0,
+	"ui_right": 0.0
+}
+var is_sprinting = false
+const DOUBLE_TAP_TIME = 0.3 # seconds
 
 # --- Zoom Constants ---
 @export var ZOOM_SPEED = 0.5
@@ -66,6 +77,15 @@ func _input(event):
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+	# 5. Handle Double-Tap Sprint Detection
+	if event is InputEventKey and event.pressed and not event.is_echo():
+		for action in ["ui_up", "ui_down", "ui_left", "ui_right"]:
+			if event.is_action_pressed(action):
+				var current_time = Time.get_ticks_msec() / 1000.0
+				if (current_time - last_press_times[action]) < DOUBLE_TAP_TIME:
+					is_sprinting = true
+				last_press_times[action] = current_time
+
 func _try_grab_nearest_cart():
 	# Find the closest cart within 3 meters
 	var carts = get_tree().get_nodes_in_group("shopping_cart")
@@ -124,9 +144,11 @@ func _physics_process(delta: float) -> void:
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
+	var current_speed = SPRINT_SPEED if is_sprinting else SPEED
+	
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * current_speed
+		velocity.z = direction.z * current_speed
 		if is_instance_valid(visual_model):
 			var target_angle = atan2(input_dir.x, input_dir.y)
 			visual_model.rotation.y = lerp_angle(visual_model.rotation.y, target_angle, TURN_SPEED * delta)
@@ -135,6 +157,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+		is_sprinting = false # Reset sprint when movement stops
 		if is_instance_valid(anim_player) and anim_player.current_animation != "Rig_Medium_MovementBasic/Jump_Idle":
 			anim_player.play("Rig_Medium_MovementBasic/Jump_Idle")
 
