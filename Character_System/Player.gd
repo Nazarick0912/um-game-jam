@@ -90,12 +90,20 @@ func _attach_cart(cart: RigidBody3D):
 		attached_cart.sleeping = false
 	attached_cart.freeze = true
 	
+	# Prevent the cart from pushing the player away (physics feedback loop)
+	add_collision_exception_with(attached_cart)
+	
+	# Reparent to player
 	attached_cart.reparent(self, true)
-	attached_cart.position = Vector3(0, 0, -1.8)
-	attached_cart.rotation_degrees = Vector3(0, 90, 0)
+	# Position exactly in front (X=0, Y=0 (floor), Z=-1.1)
+	attached_cart.position = Vector3(0, -0.3, -1.1)
+	# Flip 180 degrees to bring handle to your hands
+	attached_cart.rotation_degrees = Vector3(0, 180, 0)
 
 func _detach_cart():
 	if is_instance_valid(attached_cart):
+		# Restore collisions
+		remove_collision_exception_with(attached_cart)
 		if is_instance_valid(_orig_parent):
 			attached_cart.reparent(_orig_parent, true)
 		else:
