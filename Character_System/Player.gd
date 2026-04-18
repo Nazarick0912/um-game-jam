@@ -18,6 +18,12 @@ var is_sprinting = false
 const DOUBLE_TAP_TIME = 0.3 # seconds
 var is_sliding = false
 var slide_timer = 0.0
+var target_zoom = 4.0 # Initial camera distance
+
+# Fatigue mechanic variables
+var push_time = 0.0
+var fatigue_timer = 0.0
+var is_fatigued = false
 
 # --- Zoom Constants ---
 @export var ZOOM_SPEED = 0.5
@@ -60,10 +66,10 @@ func _input(event):
 	# 2. Zoom
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-			camera.position.z -= ZOOM_SPEED
+			target_zoom -= ZOOM_SPEED
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-			camera.position.z += ZOOM_SPEED
-		camera.position.z = clamp(camera.position.z, MIN_ZOOM, MAX_ZOOM)
+			target_zoom += ZOOM_SPEED
+		target_zoom = clamp(target_zoom, MIN_ZOOM, MAX_ZOOM)
 
 	# 3. Toggle Grab (P key)
 	if event is InputEventKey and event.pressed and event.keycode == KEY_P:
@@ -144,22 +150,40 @@ func _physics_process(delta: float) -> void:
 
 	# Movement
 	var input_dir := Vector2.ZERO
-	if not is_sliding:
+	if not is_sliding and not is_fatigued:
 		input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 		
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	var current_speed = SPRINT_SPEED if is_sprinting else SPEED
 	
-	if direction and not is_sliding:
+	if direction and not is_sliding and not is_fatigued:
 		velocity.x = direction.x * current_speed
 		velocity.z = direction.z * current_speed
+		
+		# --- Fatigue Exertion ---
+		if attached_cart != null:
+			push_time += delta
+			if push_time >= 5.0:
+				is_fatigued = true
+				push_time = 0.0
+				fatigue_timer = 0.5
 		if is_instance_valid(visual_model):
 			var target_angle = atan2(input_dir.x, input_dir.y)
 			visual_model.rotation.y = lerp_angle(visual_model.rotation.y, target_angle, TURN_SPEED * delta)
 		if is_instance_valid(anim_player) and anim_player.current_animation != "Rig_Medium_MovementBasic/Running_A":
 			anim_player.play("Rig_Medium_MovementBasic/Running_A")
 	else:
+		# Reset push time if we stop moving voluntarily
+		if not is_fatigued:
+			push_time = 0.0
+			
+		# Handle fatigue recovery
+		if is_fatigued:
+			fatigue_timer -= delta
+			if fatigue_timer <= 0.0:
+				is_fatigued = false
+				
 		# --- Inertia Slide Logic ---
 		var friction = SPEED * 20.0 # Default snappy stop
 		
@@ -192,6 +216,16 @@ func _physics_process(delta: float) -> void:
 
 	play_time_passed += delta
 	var time_left = max(TOTAL_TIME - play_time_passed, 0.0)
+	# --- Nervous Camera Effect (Last 10 Seconds) ---
+	var pulse = 0.0
+	if time_left > 0 and time_left <= 10.0:
+		var nerv_speed = 20.0 # High frequency
+		var nerv_amount = 0.6 * (1.0 - (time_left / 10.0)) # Gets stronger as time runs out
+		pulse = sin(play_time_passed * nerv_speed) * nerv_amount
+	
+	if is_instance_valid(camera):
+		camera.position.z = target_zoom + pulse
+
 	if timer_text_edit:
 		timer_text_edit.text = "Time Left: " + str(int(ceil(time_left))) + "s"
 	if time_left <= 0.0:
