@@ -16,6 +16,8 @@ var last_press_times = {
 }
 var is_sprinting = false
 const DOUBLE_TAP_TIME = 0.3 # seconds
+var is_sliding = false
+var slide_timer = 0.0
 
 # --- Zoom Constants ---
 @export var ZOOM_SPEED = 0.5
@@ -141,12 +143,15 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 
 	# Movement
-	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var input_dir := Vector2.ZERO
+	if not is_sliding:
+		input_dir = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	var current_speed = SPRINT_SPEED if is_sprinting else SPEED
 	
-	if direction:
+	if direction and not is_sliding:
 		velocity.x = direction.x * current_speed
 		velocity.z = direction.z * current_speed
 		if is_instance_valid(visual_model):
@@ -160,14 +165,25 @@ func _physics_process(delta: float) -> void:
 		
 		# If we were sprinting with a cart, slide a bit
 		if is_sprinting and attached_cart != null:
+			is_sliding = true
 			friction = 12.0 # Calculated friction for ~3m slide from 8.5m/s
 			
 		velocity.x = move_toward(velocity.x, 0, friction * delta)
 		velocity.z = move_toward(velocity.z, 0, friction * delta)
 		
-		# Reset sprint only when nearly stopped
-		if velocity.length() < 0.1:
-			is_sprinting = false
+		# Reset sprint and slide only when nearly stopped + 0.5s delay
+		if velocity.length() < 0.2:
+			if is_sliding:
+				if slide_timer <= 0.0:
+					slide_timer = 0.5 # Begin the 0.5s lock
+				else:
+					slide_timer -= delta
+					if slide_timer <= 0.0:
+						is_sprinting = false
+						is_sliding = false
+						slide_timer = 0.0
+			else:
+				is_sprinting = false
 		
 		if is_instance_valid(anim_player) and anim_player.current_animation != "Rig_Medium_MovementBasic/Jump_Idle":
 			anim_player.play("Rig_Medium_MovementBasic/Jump_Idle")
