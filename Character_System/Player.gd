@@ -93,12 +93,13 @@ func _attach_cart(cart: RigidBody3D):
 	# Prevent the cart from pushing the player away (physics feedback loop)
 	add_collision_exception_with(attached_cart)
 	
-	# Reparent to player
-	attached_cart.reparent(self, true)
-	# Position exactly in front (X=0, Y=0 (floor), Z=-1.1)
-	attached_cart.position = Vector3(0, -0.3, -1.1)
-	# Flip 180 degrees to bring handle to your hands
-	attached_cart.rotation_degrees = Vector3(0, 180, 0)
+	# Reparent to the Knight (so it rotates when the Knight turns)
+	attached_cart.reparent(visual_model, true)
+	
+	# Position in front of the Knight
+	# Note: Knight model forward might be different, adjusting Z and rotation
+	attached_cart.position = Vector3(0, -0.3, 1.1) 
+	attached_cart.rotation_degrees = Vector3(0, 0, 0)
 
 func _detach_cart():
 	if is_instance_valid(attached_cart):
