@@ -33,6 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://opr17rv4h7g4" path="res://Christmas Asset/KayKit_Holiday_Bits_1.0_FREE/Assets/fbx/lantern.fbx" id="29_0cbny"]
 [ext_resource type="PackedScene" uid="uid://n5ox20dhsu7v" path="res://Christmas Asset/KayKit_Holiday_Bits_1.0_FREE/Assets/fbx/chair_large_red.fbx" id="30_hrvbo"]
 [ext_resource type="PackedScene" uid="uid://nl6nop7iqfa2" path="res://Christmas Asset/KayKit_Holiday_Bits_1.0_FREE/Assets/gltf/christmas_tree.gltf" id="32_blkrb"]
+[ext_resource type="PackedScene" uid="uid://b1fqq0ydtt0u0" path="res://Christmas Asset/KayKit_Holiday_Bits_1.0_FREE/Assets/fbx(unity)/carpet_round_small.fbx" id="32_f1p13"]
 [ext_resource type="PackedScene" uid="uid://brok5bnrfppog" path="res://Christmas Asset/KayKit_Holiday_Bits_1.0_FREE/Assets/gltf/christmas_tree_base.gltf" id="33_abqjc"]
 [ext_resource type="PackedScene" uid="uid://jcdtjusra3o4" path="res://Christmas Asset/KayKit_Holiday_Bits_1.0_FREE/Assets/fbx/present_A_red.fbx" id="34_6iyjs"]
 [ext_resource type="PackedScene" uid="uid://kg75uh0sbors" path="res://Christmas Asset/KayKit_Holiday_Bits_1.0_FREE/Assets/gltf/present_C_yellow.gltf" id="35_4w656"]
@@ -56,7 +57,6 @@
 [ext_resource type="PackedScene" uid="uid://ckh5cmentxom0" path="res://Assets 1/KayKit_Prototype_Bits_1.1_FREE/Assets/fbx(unity)/Pallet_Small_Decorated_A.fbx" id="53_cyx1q"]
 [ext_resource type="PackedScene" uid="uid://bd8tug8e5jvjo" path="res://Assets 1/KayKit_Prototype_Bits_1.1_FREE/Assets/fbx(unity)/Pallet_Small_Decorated_B.fbx" id="54_0dhbp"]
 [ext_resource type="PackedScene" uid="uid://dxcmbk3nxkqjd" path="res://Kitchen Asset/KayKit_Restaurant_Bits_1.0_FREE/Assets/fbx/crate_carrots.fbx" id="55_jx0wj"]
-[ext_resource type="PackedScene" uid="uid://ca4qxfno8slt2" path="res://Christmas Asset/KayKit_Holiday_Bits_1.0_FREE/Assets/gltf/basketball.gltf" id="56_kkkcx"]
 [ext_resource type="PackedScene" uid="uid://wmnj0h5abi2e" path="res://Assets 1/KayKit_Prototype_Bits_1.1_FREE/Assets/fbx/Pallet_Large.fbx" id="57_34ol3"]
 [ext_resource type="PackedScene" uid="uid://b4s2xk60t1j5d" path="res://Assets 1/KayKit_Prototype_Bits_1.1_FREE/Assets/gltf/Barrel_A.gltf" id="58_c2n8d"]
 [ext_resource type="PackedScene" uid="uid://o07rke6m7imy" path="res://Assets 1/KayKit_Prototype_Bits_1.1_FREE/Assets/gltf/Barrel_B.gltf" id="59_wy5fy"]
@@ -79,7 +79,7 @@
 [ext_resource type="PackedScene" uid="uid://bgcc57327j1b3" path="res://Character_System/Customer.tscn" id="80_npc"]
 [ext_resource type="Script" uid="uid://cnfi1qr1dgi1a" path="res://GameItemSpawner.gd" id="81_spawner"]
 [ext_resource type="Script" uid="uid://c018dayf71uyy" path="res://ShoppingHUD.gd" id="82_hud"]
-[ext_resource type="Shader" path="res://wavy_floor.gdshader" id="83_wavy"]
+[ext_resource type="Shader" uid="uid://b30vm24a44or8" path="res://wavy_floor.gdshader" id="83_wavy"]
 
 [sub_resource type="Environment" id="Environment_gngh3"]
 background_mode = 1
@@ -91,6 +91,7 @@ ssao_enabled = true
 ssil_enabled = true
 
 [sub_resource type="ShaderMaterial" id="StandardMaterial3D_qsp4k"]
+render_priority = 0
 shader = ExtResource("83_wavy")
 shader_parameter/albedo_texture = ExtResource("1_vivmo")
 shader_parameter/wave_intensity = 0.0
@@ -559,6 +560,9 @@ transform = Transform3D(-7.996078e-08, 0, 1.0111926, 0, 1.1196622, 0, -1.8292896
 [node name="wall-window" parent="Assets/Market Assets" unique_id=1787151647 instance=ExtResource("19_ryguw")]
 transform = Transform3D(4.963745, 0, 0, 0, 1.9735112, 0, 0, 0, 1, 3.3807278, 0.111071944, -0.7959604)
 
+[node name="carpet_round_small" parent="Assets/Market Assets" unique_id=129467097 instance=ExtResource("32_f1p13")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.64969635, -0.0013791099, 0.076895714)
+
 [node name="kitchen" type="Node3D" parent="Assets" unique_id=1755234214]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 5.5898156, 0.06430167, 10.606803)
 
@@ -959,69 +963,8 @@ transform = Transform3D(2.2709339, 0, 0, 0, 3.223952, 0, 0, 0, 2.9054768, 23.359
 [node name="Item" type="Node3D" parent="Assets" unique_id=902574547]
 transform = Transform3D(0.35359916, 0, 0, 0, 0.451912, 0, 0, 0, 0.36068952, 11.117443, 0.6877037, 9.691504)
 
-[node name="basketball2" parent="Assets/Item" unique_id=1559571559 instance=ExtResource("56_kkkcx")]
-
-[node name="basketball5" parent="Assets/Item" unique_id=1481891042 instance=ExtResource("56_kkkcx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3862963, 0, 0)
-
-[node name="basketball3" parent="Assets/Item" unique_id=700930536 instance=ExtResource("56_kkkcx")]
-transform = Transform3D(1, 0, 0, 0, -0.814146, -0.4634488, 0, 0.72751576, -0.81414604, 0, 0, 0.5393069)
-
-[node name="basketball8" parent="Assets/Item" unique_id=1881677537 instance=ExtResource("56_kkkcx")]
-transform = Transform3D(1, 0, 0, 0, 0.23677047, 0.7754464, 0, -1.2172855, 0.23677047, 0, -0.02198577, 1.8617703)
-
-[node name="basketball10" parent="Assets/Item" unique_id=149166432 instance=ExtResource("56_kkkcx")]
-transform = Transform3D(-0.99773735, 0.07415492, 0.034643773, -0.05110968, -0.7169816, -0.55392975, -0.015605541, -0.87036383, 0.7191495, 0.73896694, -0.02198577, 1.8617703)
-
-[node name="basketball11" parent="Assets/Item" unique_id=176214699 instance=ExtResource("56_kkkcx")]
-transform = Transform3D(-0.99773735, 0.07415492, 0.034643773, -0.05110968, -0.7169816, -0.55392975, -0.015605541, -0.87036383, 0.7191495, 1.5090761, 0.017463446, 1.8738155)
-
-[node name="basketball9" parent="Assets/Item" unique_id=1693699528 instance=ExtResource("56_kkkcx")]
-transform = Transform3D(1, 0, 0, 0, 0.23677047, 0.7754464, 0, -1.2172855, 0.23677047, 0, -0.10187805, 1.2227637)
-
-[node name="basketball4" parent="Assets/Item" unique_id=1435931276 instance=ExtResource("56_kkkcx")]
-transform = Transform3D(0.10126311, 1.2104245, 0.31065667, 0.62149143, -0.26129502, 0.43776593, 0.58726776, 0.2334915, -0.7787279, 0.33950233, 0.2939998, 1.05578)
-
-[node name="basketball12" parent="Assets/Item" unique_id=1754568600 instance=ExtResource("56_kkkcx")]
-transform = Transform3D(0.04605298, 1.2104248, -0.3239913, -0.3630634, -0.26129502, -0.6755603, -0.8672435, 0.23349155, 0.42742738, 0.91675854, 0.44395065, 0.29152656)
-
-[node name="basketball6" parent="Assets/Item" unique_id=1183359531 instance=ExtResource("56_kkkcx")]
-transform = Transform3D(0.10126311, 1.2104245, 0.31065667, 0.62149143, -0.26129502, 0.43776593, 0.58726776, 0.2334915, -0.7787279, 0.33950233, 0.2939998, 1.05578)
-
-[node name="basketball7" parent="Assets/Item" unique_id=808370937 instance=ExtResource("56_kkkcx")]
-transform = Transform3D(0.29771712, -1.2161914, -0.077696584, 0.50118625, 0.13995722, 0.6026515, -0.69395596, -0.3427788, 0.6512059, 1.2864561, 0.20257378, 1.3155191)
-
 [node name="crate_carrots3" parent="Assets/Item" unique_id=1761354694 instance=ExtResource("55_jx0wj")]
 transform = Transform3D(1.605585, 0, 0, 0, 1.7835066, 0, 0, 0, 2.0138352, 0.8827944, -1.5031022, 1.0930778)
-
-[node name="basketball13" parent="Assets/Item" unique_id=329122890 instance=ExtResource("56_kkkcx")]
-
-[node name="basketball14" parent="Assets/Item" unique_id=105397326 instance=ExtResource("56_kkkcx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3862963, 0, 0)
-
-[node name="basketball15" parent="Assets/Item" unique_id=1988288817 instance=ExtResource("56_kkkcx")]
-transform = Transform3D(1, 0, 0, 0, -0.814146, -0.4634488, 0, 0.72751576, -0.81414604, 0, 0, 0.5393069)
-
-[node name="basketball16" parent="Assets/Item" unique_id=2074153240 instance=ExtResource("56_kkkcx")]
-transform = Transform3D(1, 0, 0, 0, 0.23677047, 0.7754464, 0, -1.2172855, 0.23677047, 0, -0.02198577, 1.8617703)
-
-[node name="basketball17" parent="Assets/Item" unique_id=1486469127 instance=ExtResource("56_kkkcx")]
-transform = Transform3D(-0.99773735, 0.07415492, 0.034643773, -0.05110968, -0.7169816, -0.55392975, -0.015605541, -0.87036383, 0.7191495, 0.73896694, -0.02198577, 1.8617703)
-
-[node name="basketball18" parent="Assets/Item" unique_id=643886520 instance=ExtResource("56_kkkcx")]
-transform = Transform3D(-0.99773735, 0.07415492, 0.034643773, -0.05110968, -0.7169816, -0.55392975, -0.015605541, -0.87036383, 0.7191495, 1.5090761, 0.017463446, 1.8738155)
-
-[node name="basketball19" parent="Assets/Item" unique_id=366150204 instance=ExtResource("56_kkkcx")]
-transform = Transform3D(1, 0, 0, 0, 0.23677047, 0.7754464, 0, -1.2172855, 0.23677047, 0, -0.10187805, 1.2227637)
-
-[node name="basketball20" parent="Assets/Item" unique_id=1382848806 instance=ExtResource("56_kkkcx")]
-transform = Transform3D(0.10126311, 1.2104245, 0.31065667, 0.62149143, -0.26129502, 0.43776593, 0.58726776, 0.2334915, -0.7787279, 0.33950233, 0.2939998, 1.05578)
-
-[node name="basketball21" parent="Assets/Item" unique_id=1512691728 instance=ExtResource("56_kkkcx")]
-transform = Transform3D(0.04605298, 1.2104248, -0.3239913, -0.3630634, -0.26129502, -0.6755603, -0.8672435, 0.23349155, 0.42742738, 1.5830755, 0.07538116, 0.5677476)
-
-[node name="basketball22" parent="Assets/Item" unique_id=1858923838 instance=ExtResource("56_kkkcx")]
-transform = Transform3D(0.29771712, -1.2161914, -0.077696584, 0.50118625, 0.13995722, 0.6026515, -0.69395596, -0.3427788, 0.6512059, 1.2864561, 0.20257378, 1.3155191)
 
 [node name="Pallet_Large" parent="Assets/Item" unique_id=1088074110 instance=ExtResource("57_34ol3")]
 transform = Transform3D(0.7070153, 0, 0, 0, 0.5532051, 0, 0, 0, 1.3137766, 0.3584814, -1.5217658, 7.159382)

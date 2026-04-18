@@ -47,12 +47,24 @@ var _orig_parent: Node = null
 @onready var camera = $CameraPivot/Camera3D 
 @onready var timer_text_edit = get_node_or_null("%TimerText")
 
+var checkout_zones = []
+
 func _ready():
 	add_to_group("player")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	# Find checkout carpets automatically
+	_find_checkout_zones(get_tree().root)
+	
 	move_sfx_player = AudioStreamPlayer.new()
 	move_sfx_player.stream = load("res://Assets 1/KayKit_Prototype_Bits_1.1_FREE/Music/Hey watch it.ogg")
 	add_child(move_sfx_player)
+
+func _find_checkout_zones(node: Node):
+	if "carpet" in node.name.to_lower() or "checkout" in node.name.to_lower():
+		checkout_zones.append(node)
+	for child in node.get_children():
+		_find_checkout_zones(child)
 
 func _input(event):
 	# 1. Look
@@ -234,6 +246,14 @@ func _physics_process(delta: float) -> void:
 		var sway_val = sin(play_time_passed * sway_speed) * sway_intensity
 		# -25.0 is the base Y rotation from your screenshot
 		camera.rotation_degrees.y = -25.0 + sway_val
+
+	# --- Checkout Zone Proximity Trigger ---
+	var gm = get_node_or_null("/root/GameModeManager")
+	if gm and gm.list_complete:
+		for zone in checkout_zones:
+			if is_instance_valid(zone):
+				if global_position.distance_to(zone.global_position) < 3.0:
+					gm.do_checkout()
 
 	move_and_slide()
 

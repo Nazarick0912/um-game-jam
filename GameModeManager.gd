@@ -15,6 +15,7 @@ var shopping_list: Dictionary = {}
 
 var _game_active: bool = false
 var _game_ended:  bool = false
+var list_complete: bool = false
 
 # Global Audio Stream Players
 var start_sfx_player: AudioStreamPlayer
@@ -101,6 +102,7 @@ func _reset_list() -> void:
 		
 	_game_active = true
 	_game_ended  = false
+	list_complete = false
 
 # ── Called by CollectibleItem when the player picks up an item ──
 func collect_item(item_id: String) -> void:
@@ -120,16 +122,24 @@ func _check_win() -> void:
 	for key in shopping_list:
 		if shopping_list[key]["collected"] < shopping_list[key]["required"]:
 			return
-	_game_ended  = true
-	_game_active = false
 	
-	if win_sfx_player:
-		win_sfx_player.play()
+	# All items collected, but we haven't checked out yet!
+	list_complete = true
+	# We omit the game_won signal here and wait for checkout
+	emit_signal("list_updated") 
+
+func do_checkout() -> void:
+	if list_complete and not _game_ended:
+		_game_ended  = true
+		_game_active = false
 		
-	# NEW (Optional): Stop the background music so you can hear the win sound better
-	if bgm_player:
-		bgm_player.stop()
-	emit_signal("game_won")
+		if win_sfx_player:
+			win_sfx_player.play()
+			
+		# NEW (Optional): Stop the background music so you can hear the win sound better
+		if bgm_player:
+			bgm_player.stop()
+		emit_signal("game_won")
 
 # ── Called externally when the player's 60 s timer runs out ─
 func notify_time_up() -> void:
