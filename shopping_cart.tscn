@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://byom4w6d8u7j7"]
+[gd_scene format=3 uid="uid://byom4w6d8u7j7"]
 
 [ext_resource type="Script" path="res://shopping_cart.gd" id="1_sc"]
 [ext_resource type="PackedScene" uid="uid://htds7c0vy132" path="res://Mart Asset/Models/FBX format/shopping-cart.fbx" id="2_xuqvo"]
