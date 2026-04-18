@@ -207,12 +207,12 @@ func _physics_process(delta: float) -> void:
 				is_fatigued = false
 				
 		# --- Inertia Slide Logic ---
-		var friction = SPEED * 20.0 # Default snappy stop
+		var friction = SPEED * 6.0 # Default snappy stop
 		
 		# If we were sprinting with a cart, slide a bit
 		if is_sprinting and attached_cart != null:
 			is_sliding = true
-			friction = 12.0 # Calculated friction for ~3m slide from 8.5m/s
+			friction = 6.0 # Calculated friction for ~3m slide from 8.5m/s
 			
 		velocity.x = move_toward(velocity.x, 0, friction * delta)
 		velocity.z = move_toward(velocity.z, 0, friction * delta)
@@ -245,8 +245,8 @@ func _physics_process(delta: float) -> void:
 
 	# --- Drunken Camera Sway ---
 	if is_instance_valid(camera):
-		var sway_speed = 3.0 # Slow, rhythmic sway
-		var max_sway = 35.0 # From your request
+		var sway_speed = 2.0 # Slow, rhythmic sway
+		var max_sway = 30.0 # From your request
 		var sway_intensity = (play_time_passed / TOTAL_TIME) * max_sway
 		var sway_val = sin(play_time_passed * sway_speed) * sway_intensity
 		# -25.0 is the base Y rotation from your screenshot

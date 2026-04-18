@@ -47,7 +47,7 @@ libraries/Rig_Medium_MovementBasic = ExtResource("3_kne1u")
 [node name="CameraPivot" type="Node3D" parent="." unique_id=887785279]
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot" unique_id=575861272]
-transform = Transform3D(0.9999611, 0, -0.008813816, 0, 1, 0, 0.008813816, 0, 0.9999611, -0.9644276, 1.3299232, 2.1939356)
+transform = Transform3D(0.9999999, 0, 0, 0, 1, 0, 0, 0, 0.9999999, -0.9644276, 1.3299232, 2.1939356)
 current = true
 
 [node name="Generic6DOFJoint3D" type="Generic6DOFJoint3D" parent="." unique_id=27431653]

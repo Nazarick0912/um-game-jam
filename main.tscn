@@ -80,6 +80,7 @@
 [ext_resource type="Script" uid="uid://cnfi1qr1dgi1a" path="res://GameItemSpawner.gd" id="81_spawner"]
 [ext_resource type="Script" uid="uid://c018dayf71uyy" path="res://ShoppingHUD.gd" id="82_hud"]
 [ext_resource type="Shader" path="res://wavy_floor.gdshader" id="83_wavy"]
+[ext_resource type="Script" uid="uid://cetwdb67kcx5t" path="res://InstructionSign.gd" id="InstructionSign_res"]
 
 [sub_resource type="Environment" id="Environment_gngh3"]
 background_mode = 1
@@ -97,7 +98,82 @@ shader_parameter/albedo_texture = ExtResource("1_vivmo")
 shader_parameter/wave_intensity = 0.0
 shader_parameter/time = 0.0
 
+[sub_resource type="StandardMaterial3D" id="WallMat_instrboard"]
+albedo_color = Color(0.96, 0.91, 0.8, 1)
+roughness = 0.85
+
 [node name="Main" type="Node3D" unique_id=982590133]
+
+[node name="InstructionSign" type="Label3D" parent="." unique_id=-1198114581]
+transform = Transform3D(0, 0, 0.99889416, 0, 0.99889416, 0, -0.99889416, 0, 0, -33.76608, 3.8673759, -33.625397)
+pixel_size = 0.013
+modulate = Color(1, 0.72, 0.05, 1)
+text = "🛒  SUPERMARKET RUSH
+━━━━━━━━━━━━━━━━━
+⏱  RULES
+
+  1. Step on the large carpet to START.
+  2. Check shopping list (top-left).
+  3. Walk into items to collect them.
+  4. Go to checkout carpet to WIN!
+  5. 60 seconds — hurry!
+"
+font_size = 36
+outline_size = 10
+horizontal_alignment = 0
+script = ExtResource("InstructionSign_res")
+
+[node name="InstructionSign4" type="Label3D" parent="." unique_id=1379595433]
+transform = Transform3D(0.99889416, 0, 2.9802322e-08, 0, 0.99889416, 0, -2.9802322e-08, 0, 0.99889416, -33.30065, 4.58334, -42.1075)
+pixel_size = 0.013
+modulate = Color(1, 0.72, 0.05, 1)
+text = "🛒  SUPERMARKET RUSH
+━━━━━━━━━━━━━━━━━
+⚠  WATCH OUT
+  Sprinting with cart for 5s
+  causes fatigue! Rest to recover.
+
+  Good luck, shopper! 🏆"
+font_size = 36
+outline_size = 10
+horizontal_alignment = 0
+script = ExtResource("InstructionSign_res")
+
+[node name="InstructionSign2" type="Label3D" parent="." unique_id=457072174]
+transform = Transform3D(0, 0, 0.99889416, 0, 0.99889416, 0, -0.99889416, 0, 0, -33.75, 3.8589687, -26.690462)
+pixel_size = 0.013
+modulate = Color(1, 0.72, 0.05, 1)
+text = "🛒  SUPERMARKET RUSH
+━━━━━━━━━━━━━━━━━
+
+🎮  HOW TO PLAY
+
+  WASD  ─  Move
+  Double-tap WASD  ─  Sprint
+  E  ─  Grab / Release cart
+  Mouse  ─  Look around
+  Scroll Wheel  ─  Zoom camera"
+font_size = 36
+outline_size = 10
+horizontal_alignment = 0
+script = ExtResource("InstructionSign_res")
+
+[node name="InstructionSign3" type="Label3D" parent="." unique_id=718345236]
+transform = Transform3D(-0.99889416, 0, -8.73261e-08, 0, 0.99889416, 0, 8.73261e-08, 0, -0.99889416, -27.218618, 4.2671995, -26.654663)
+pixel_size = 0.013
+modulate = Color(1, 0.72, 0.05, 1)
+text = "🛒  SUPERMARKET RUSH
+━━━━━━━━━━━━━━━━━
+
+📋  YOUR GOAL
+Collect ALL items on your
+shopping list before the 
+time runs out!
+"
+font_size = 36
+outline_size = 10
+horizontal_alignment = 0
+script = ExtResource("InstructionSign_res")
 
 [node name="timer_text_edit" type="TextEdit" parent="." unique_id=1690433000]
 offset_left = -150.0
@@ -172,6 +248,7 @@ size = Vector3(114.3, 218, 375.4)
 
 [node name="CSGBox3D9" type="CSGBox3D" parent="FLOOR/CSGCombiner3D" unique_id=1319556043]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 422.15002, -2.3754578, 237.44995)
+material_override = SubResource("WallMat_instrboard")
 use_collision = true
 size = Vector3(51, 458.4, 904)
 
@@ -212,7 +289,7 @@ transform = Transform3D(57.64412, -39.735912, 70.5343, 22.68256, 95.400604, 30.1
 transform = Transform3D(46.81034, 10.00718, 14.444661, -9.536743e-07, 41.100246, -28.474018, -17.572475, 26.65757, 38.47833, 968.23627, -8.602555, -2014.2577)
 
 [node name="Player" parent="." unique_id=506474146 instance=ExtResource("1_ig7tw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.662596, -0.12860349, -34.31503)
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -28.581429, -0.12860349, -34.31503)
 
 [node name="Assets" type="Node3D" parent="." unique_id=267824696]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -22.359262, -0.25720668, -42.42721)
