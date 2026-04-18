@@ -23,6 +23,7 @@ const SNOWFLAKE_COUNT   := 22
 @onready var start_button   : Button         = $Card/VBox/StartButton
 @onready var hint_label     : Label          = $Card/VBox/HintLabel
 @onready var footer_label   : Label          = $FooterLabel
+var start_sfx_player: AudioStreamPlayer
 
 # ─── Runtime state ───────────────────────────
 var _time          : float = 0.0
@@ -37,17 +38,20 @@ const TREE_AX : Array = [0.06, 0.94]
 const TREE_AY : Array = [0.48, 0.48]
 
 # ─────────────────────────────────────────────
+# --- THE READY FUNCTION (Step 2) ---
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	_apply_styles()
 	_spawn_trees()
 	_spawn_snowflakes()
 	start_button.pressed.connect(_on_start)
-
+	# Setup the sound effect player
+	start_sfx_player = AudioStreamPlayer.new()
+	start_sfx_player.stream = load("res://Assets 1/KayKit_Prototype_Bits_1.1_FREE/Music/DingDong.ogg")
+	add_child(start_sfx_player)
 	# Wait one frame so Control layout is fully resolved, THEN animate
 	await get_tree().process_frame
 	_play_intro_animation()
-
 # ─────────────────────────────────────────────
 #  STYLES
 # ─────────────────────────────────────────────
@@ -285,9 +289,10 @@ func _input(event: InputEvent) -> void:
 func _on_start() -> void:
 	if _transitioning:
 		return
+	if start_sfx_player:start_sfx_player.play()
 	_transitioning = true
 	_can_start     = false
-
+	GameModeManager.play_start_sound()
 	var tw := create_tween()
 	tw.set_parallel(true)
 	tw.tween_property(card,         "modulate", Color(1, 1, 1, 0), 0.5).set_ease(Tween.EASE_IN)

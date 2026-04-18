@@ -51,7 +51,6 @@ var _orig_parent: Node = null
 func _ready():
 	add_to_group("player")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	
 	move_sfx_player = AudioStreamPlayer.new()
 	move_sfx_player.stream = load("res://Assets 1/KayKit_Prototype_Bits_1.1_FREE/Music/Hey watch it.ogg")
 	add_child(move_sfx_player)
@@ -161,6 +160,15 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction.x * current_speed
 		velocity.z = direction.z * current_speed
 		
+		# Now it is correctly indented!
+		if not _hey_played:
+			_hey_played = true
+			if move_sfx_player:
+				move_sfx_player.play()
+
+		# ... rest of the movement code ...
+
+
 		# --- Fatigue Exertion ---
 		if attached_cart != null:
 			push_time += delta

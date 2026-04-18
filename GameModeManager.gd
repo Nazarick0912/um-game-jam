@@ -17,10 +17,11 @@ var _game_active: bool = false
 var _game_ended:  bool = false
 
 # Global Audio Stream Players
+var start_sfx_player: AudioStreamPlayer
 var bgm_player: AudioStreamPlayer
 var pickup_player: AudioStreamPlayer
 var lose_player: AudioStreamPlayer
-
+var win_sfx_player: AudioStreamPlayer
 # ── Lifecycle ────────────────────────────────────────────
 func _ready() -> void:
 	# --- AUDIO SETUP ---
@@ -40,8 +41,16 @@ func _ready() -> void:
 	lose_player = AudioStreamPlayer.new()
 	lose_player.stream = load("res://Assets 1/KayKit_Prototype_Bits_1.1_FREE/Music/Lose2.ogg")
 	add_child(lose_player)
-
+	
+	start_sfx_player = AudioStreamPlayer.new()
+	start_sfx_player.stream = load("res://Assets 1/KayKit_Prototype_Bits_1.1_FREE/Music/DingDong.ogg")
+	add_child(start_sfx_player)
 	_reset_list()
+	
+	win_sfx_player = AudioStreamPlayer.new()
+	win_sfx_player.stream = load("res://Assets 1/KayKit_Prototype_Bits_1.1_FREE/Music/Yeah.ogg")
+	win_sfx_player.process_mode = Node.PROCESS_MODE_ALWAYS 
+	add_child(win_sfx_player)
 
 func _reset_list() -> void:
 	# Resume BGM if it was stopped (e.g. after a loss)
@@ -113,6 +122,13 @@ func _check_win() -> void:
 			return
 	_game_ended  = true
 	_game_active = false
+	
+	if win_sfx_player:
+		win_sfx_player.play()
+		
+	# NEW (Optional): Stop the background music so you can hear the win sound better
+	if bgm_player:
+		bgm_player.stop()
 	emit_signal("game_won")
 
 # ── Called externally when the player's 60 s timer runs out ─
@@ -139,3 +155,7 @@ func get_progress_lines() -> Array:
 		var tick: String = "✅" if done >= e["required"] else "🔲"
 		lines.append("%s %s  %d / %d" % [tick, e["label"], done, e["required"]])
 	return lines
+
+func play_start_sound() -> void:
+	if start_sfx_player:
+		start_sfx_player.play()
