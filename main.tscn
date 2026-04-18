@@ -79,9 +79,9 @@
 [ext_resource type="PackedScene" uid="uid://bgcc57327j1b3" path="res://Character_System/Customer.tscn" id="80_npc"]
 [ext_resource type="Script" uid="uid://cnfi1qr1dgi1a" path="res://GameItemSpawner.gd" id="81_spawner"]
 [ext_resource type="Script" uid="uid://c018dayf71uyy" path="res://ShoppingHUD.gd" id="82_hud"]
-[ext_resource type="Shader" path="res://wavy_floor.gdshader" id="83_wavy"]
-[ext_resource type="Script" uid="uid://cetwdb67kcx5t" path="res://InstructionSign.gd" id="InstructionSign_res"]
-[ext_resource type="Script" uid="uid://o5sdjtwyr0xv" path="res://SunCycle.gd" id="84_sun"]
+[ext_resource type="Shader" uid="uid://b30vm24a44or8" path="res://wavy_floor.gdshader" id="83_wavy"]
+[ext_resource type="Script" path="res://SunCycle.gd" id="84_sun"]
+[ext_resource type="Script" path="res://InstructionSign.gd" id="InstructionSign_res"]
 
 [sub_resource type="Environment" id="Environment_gngh3"]
 background_mode = 1
@@ -109,7 +109,8 @@ roughness = 0.85
 transform = Transform3D(0, 0, 0.99889416, 0, 0.99889416, 0, -0.99889416, 0, 0, -33.76608, 3.8673759, -33.625397)
 pixel_size = 0.013
 modulate = Color(1, 0.72, 0.05, 1)
-text = "🛒  SUPERMARKET RUSH
+text = "🛒  LAST 60 SECONDS BEFORE 
+LOSING CONTROL
 ━━━━━━━━━━━━━━━━━
 ⏱  RULES
 
@@ -128,7 +129,8 @@ script = ExtResource("InstructionSign_res")
 transform = Transform3D(0.99889416, 0, 2.9802322e-08, 0, 0.99889416, 0, -2.9802322e-08, 0, 0.99889416, -33.30065, 4.58334, -42.1075)
 pixel_size = 0.013
 modulate = Color(1, 0.72, 0.05, 1)
-text = "🛒  SUPERMARKET RUSH
+text = "🛒  LAST 60 SECONDS BEFORE 
+LOSING CONTROL
 ━━━━━━━━━━━━━━━━━
 ⚠  WATCH OUT
   Sprinting with cart for 5s
@@ -144,7 +146,8 @@ script = ExtResource("InstructionSign_res")
 transform = Transform3D(0, 0, 0.99889416, 0, 0.99889416, 0, -0.99889416, 0, 0, -33.75, 3.8589687, -26.690462)
 pixel_size = 0.013
 modulate = Color(1, 0.72, 0.05, 1)
-text = "🛒  SUPERMARKET RUSH
+text = "🛒  LAST 60 SECONDS BEFORE 
+LOSING CONTROL
 ━━━━━━━━━━━━━━━━━
 
 🎮  HOW TO PLAY
@@ -160,10 +163,11 @@ horizontal_alignment = 0
 script = ExtResource("InstructionSign_res")
 
 [node name="InstructionSign3" type="Label3D" parent="." unique_id=718345236]
-transform = Transform3D(-0.99889416, 0, -8.73261e-08, 0, 0.99889416, 0, 8.73261e-08, 0, -0.99889416, -27.218618, 4.2671995, -26.654663)
+transform = Transform3D(-0.99889416, 0, -8.73261e-08, 0, 0.99889416, 0, 8.73261e-08, 0, -0.99889416, -26.4768, 4.2671995, -26.654663)
 pixel_size = 0.013
 modulate = Color(1, 0.72, 0.05, 1)
-text = "🛒  SUPERMARKET RUSH
+text = "🛒  LAST 60 SECONDS BEFORE 
+LOSING CONTROL
 ━━━━━━━━━━━━━━━━━
 
 📋  YOUR GOAL
@@ -184,8 +188,8 @@ offset_bottom = -3.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=380161797]
 transform = Transform3D(-0.07330785, 0.9858323, -0.15086702, 0.44475833, 0.16771433, 0.8798082, 0.8926457, -0.0026025104, -0.450752, -5.297562, 36.773754, -43.453648)
-script = ExtResource("84_sun")
 shadow_enabled = true
+script = ExtResource("84_sun")
 
 [node name="DirectionalLight3D2" type="DirectionalLight3D" parent="." unique_id=1491237489]
 transform = Transform3D(0.6550054, -0.2033368, 0.7277515, -0.6846819, 0.2477164, 0.6854542, -0.31965405, -0.9472543, 0.023034543, 0.11584568, 23.66462, 2.1436195)
