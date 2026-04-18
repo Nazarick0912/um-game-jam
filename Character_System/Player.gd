@@ -166,8 +166,6 @@ func _physics_process(delta: float) -> void:
 			if move_sfx_player:
 				move_sfx_player.play()
 
-		# ... rest of the movement code ...
-
 
 		# --- Fatigue Exertion ---
 		if attached_cart != null:
