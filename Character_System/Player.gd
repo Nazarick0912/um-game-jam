@@ -25,6 +25,9 @@ var push_time = 0.0
 var fatigue_timer = 0.0
 var is_fatigued = false
 
+var game_started = false
+var start_carpet = null
+
 # --- Zoom Constants ---
 @export var ZOOM_SPEED = 0.5
 @export var MIN_ZOOM = 1.5
@@ -61,7 +64,9 @@ func _ready():
 	add_child(move_sfx_player)
 
 func _find_checkout_zones(node: Node):
-	if "carpet" in node.name.to_lower() or "checkout" in node.name.to_lower():
+	if "carpet_round_large" in node.name.to_lower():
+		start_carpet = node
+	elif "carpet" in node.name.to_lower() or "checkout" in node.name.to_lower():
 		checkout_zones.append(node)
 	for child in node.get_children():
 		_find_checkout_zones(child)
@@ -179,7 +184,7 @@ func _physics_process(delta: float) -> void:
 
 
 		# --- Fatigue Exertion ---
-		if attached_cart != null:
+		if attached_cart != null and is_sprinting:
 			push_time += delta
 			if push_time >= 5.0:
 				is_fatigued = true
@@ -247,9 +252,17 @@ func _physics_process(delta: float) -> void:
 		# -25.0 is the base Y rotation from your screenshot
 		camera.rotation_degrees.y = -25.0 + sway_val
 
-	# --- Checkout Zone Proximity Trigger ---
+	# --- Start Game Proximity Trigger ---
 	var gm = get_node_or_null("/root/GameModeManager")
-	if gm and gm.list_complete:
+	if not game_started:
+		if is_instance_valid(start_carpet):
+			if global_position.distance_to(start_carpet.global_position) < 3.0:
+				game_started = true
+				if gm:
+					gm.start_game()
+
+	# --- Checkout Zone Proximity Trigger ---
+	if gm and gm.list_complete and game_started:
 		for zone in checkout_zones:
 			if is_instance_valid(zone):
 				if global_position.distance_to(zone.global_position) < 3.0:
@@ -257,11 +270,12 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	play_time_passed += delta
+	if game_started:
+		play_time_passed += delta
 	var time_left = max(TOTAL_TIME - play_time_passed, 0.0)
 	# --- Nervous Camera Effect (Last 10 Seconds) ---
 	var pulse = 0.0
-	if time_left > 0 and time_left <= 10.0:
+	if time_left > 0 and time_left <= 10.0 and game_started:
 		var nerv_speed = 20.0 # High frequency
 		var nerv_amount = 0.6 * (1.0 - (time_left / 10.0)) # Gets stronger as time runs out
 		pulse = sin(play_time_passed * nerv_speed) * nerv_amount
@@ -270,8 +284,11 @@ func _physics_process(delta: float) -> void:
 		camera.position.z = target_zoom + pulse
 
 	if timer_text_edit:
-		timer_text_edit.text = "Time Left: " + str(int(ceil(time_left))) + "s"
-	if time_left <= 0.0:
+		if not game_started:
+			timer_text_edit.text = "Step on the large carpet to start!"
+		else:
+			timer_text_edit.text = "Time Left: " + str(int(ceil(time_left))) + "s"
+	if time_left <= 0.0 and game_started:
 		handle_game_over()
 
 func handle_game_over():

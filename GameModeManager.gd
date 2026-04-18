@@ -100,9 +100,15 @@ func _reset_list() -> void:
 			"collected": 0
 		}
 		
-	_game_active = true
+	_game_active = false
 	_game_ended  = false
 	list_complete = false
+
+func start_game() -> void:
+	if not _game_active and not _game_ended:
+		_game_active = true
+		if start_sfx_player:
+			start_sfx_player.play()
 
 # ── Called by CollectibleItem when the player picks up an item ──
 func collect_item(item_id: String) -> void:
