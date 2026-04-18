@@ -1,44 +1,39 @@
 extends RigidBody3D
 
 @onready var hint = $InteractionHint
-@onready var area = $InteractionArea
 
-var _player_near: bool = false
+var _player: Node3D = null
 
 func _ready():
-	# Configure physical parameters for the shopping cart
+	add_to_group("shopping_cart")
+	# Configure physical parameters
 	linear_damp = 0.2
 	angular_damp = 1.0
 	
-	# Only allow the specific node named "shopping-cart" to be pushed
-	# Any other instances (shopping-cart2, etc.) stay frozen and silent
+	# Only the main cart unfreezes
 	if name == "shopping-cart":
 		freeze = false
-		if is_instance_valid(area):
-			area.body_entered.connect(_on_body_entered)
-			area.body_exited.connect(_on_body_exited)
 	else:
-		# Remove interaction elements from decorative carts
 		freeze = true
 		if is_instance_valid(hint): hint.queue_free()
-		if is_instance_valid(area): area.queue_free()
-	
-	# Initial state
-	if is_instance_valid(hint):
-		hint.visible = false
 
-func _process(_delta: float):
-	if is_instance_valid(hint):
-		# Only show hint if player is near AND NOT currently pushing
-		if _player_near and not Input.is_key_pressed(KEY_P):
+	# Find the player in the scene
+	_player = get_tree().get_first_node_in_group("player")
+	if _player == null:
+		# Fallback detection
+		_player = get_node_or_null("/root/main/Player")
+
+func _physics_process(_delta: float):
+	if freeze:
+		return
+		
+	# Handle hint visibility based on distance
+	if is_instance_valid(hint) and is_instance_valid(_player):
+		var dist = global_position.distance_to(_player.global_position)
+		# Only show if close AND not already holding it
+		var is_grabbing = get_parent() == _player
+		
+		if dist < 3.0 and not is_grabbing and not Input.is_key_pressed(KEY_P):
 			hint.visible = true
 		else:
 			hint.visible = false
-
-func _on_body_entered(body: Node3D):
-	if body is CharacterBody3D:
-		_player_near = true
-
-func _on_body_exited(body: Node3D):
-	if body is CharacterBody3D:
-		_player_near = false

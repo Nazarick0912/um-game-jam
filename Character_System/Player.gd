@@ -19,17 +19,18 @@ var _was_moving: bool = false
 var _hey_played: bool = false
 
 var move_sfx_player: AudioStreamPlayer
+var attached_cart: RigidBody3D = null
+var _orig_parent: Node = null
 
 # --- Node References ---
 @onready var visual_model = $Knight
 @onready var anim_player = $Knight/AnimationPlayer
 @onready var pivot = $CameraPivot 
 @onready var camera = $CameraPivot/Camera3D 
-
-# Ensure this path matches your UI location in the Scene Tree
 @onready var timer_text_edit = get_node_or_null("%TimerText")
 
 func _ready():
+	add_to_group("player")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	move_sfx_player = AudioStreamPlayer.new()
@@ -37,125 +38,109 @@ func _ready():
 	add_child(move_sfx_player)
 
 func _input(event):
-	# 1. Handle Mouse Movement (Look)
+	# 1. Look
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		rotate_y(-event.relative.x * MOUSE_SENSITIVITY)
 		pivot.rotate_x(-event.relative.y * MOUSE_SENSITIVITY)
 		pivot.rotation.x = clamp(pivot.rotation.x, deg_to_rad(-80), deg_to_rad(80))
 
-	# 2. Handle Mouse Scroll (Zoom)
+	# 2. Zoom
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			camera.position.z -= ZOOM_SPEED
 		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			camera.position.z += ZOOM_SPEED
-		
 		camera.position.z = clamp(camera.position.z, MIN_ZOOM, MAX_ZOOM)
 
-	# 3. Unlock mouse (Press ESC)
+	# 3. Toggle Grab (P key)
+	if event is InputEventKey and event.pressed and event.keycode == KEY_P:
+		if attached_cart:
+			_detach_cart()
+		else:
+			_try_grab_nearest_cart()
+
+	# 4. Escape to unlock
 	if event.is_action_pressed("ui_cancel"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
+func _try_grab_nearest_cart():
+	# Find the closest cart within 3 meters
+	var carts = get_tree().get_nodes_in_group("shopping_cart")
+	var closest_cart = null
+	var min_dist = 3.5
+	
+	for cart in carts:
+		if cart is RigidBody3D and "shopping-cart" in cart.name.to_lower():
+			var dist = global_position.distance_to(cart.global_position)
+			if dist < min_dist:
+				min_dist = dist
+				closest_cart = cart
+	
+	if closest_cart:
+		_attach_cart(closest_cart)
+
+func _attach_cart(cart: RigidBody3D):
+	attached_cart = cart
+	_orig_parent = attached_cart.get_parent()
+	
+	if attached_cart.has_method("set_sleeping"):
+		attached_cart.sleeping = false
+	attached_cart.freeze = true
+	
+	attached_cart.reparent(self, true)
+	attached_cart.position = Vector3(0, 0, -1.8)
+	attached_cart.rotation_degrees = Vector3(0, 90, 0)
+
+func _detach_cart():
+	if is_instance_valid(attached_cart):
+		if is_instance_valid(_orig_parent):
+			attached_cart.reparent(_orig_parent, true)
+		else:
+			attached_cart.reparent(get_parent(), true)
+		attached_cart.freeze = false
+	attached_cart = null
+
 func _physics_process(delta: float) -> void:
-	# --- 1. Gravity & Physics ---
+	# Gravity
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
-	# --- 2. Movement Logic ---
+	# Movement
 	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	
-	var is_moving_now = direction != Vector3.ZERO
-	if is_moving_now and not _was_moving and is_on_floor() and not _hey_played:
-		if move_sfx_player:
-			move_sfx_player.play()
-			_hey_played = true
-	_was_moving = is_moving_now
 	
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
-		
-		# Rotate Knight to face movement direction
 		if is_instance_valid(visual_model):
 			var target_angle = atan2(input_dir.x, input_dir.y)
 			visual_model.rotation.y = lerp_angle(visual_model.rotation.y, target_angle, TURN_SPEED * delta)
-		
 		if is_instance_valid(anim_player) and anim_player.current_animation != "Rig_Medium_MovementBasic/Running_A":
 			anim_player.play("Rig_Medium_MovementBasic/Running_A")
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-		
 		if is_instance_valid(anim_player) and anim_player.current_animation != "Rig_Medium_MovementBasic/Jump_Idle":
 			anim_player.play("Rig_Medium_MovementBasic/Jump_Idle")
 
 	move_and_slide()
 
-	# Loop through all current collisions
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		var body = collision.get_collider()
-		
-		# If the player hits a RigidBody3D and is pressing the 'P' key
-		if body is RigidBody3D and Input.is_key_pressed(KEY_P):
-			# Wake up the cart if physics engine put it to sleep
-			if body.has_method("set_sleeping"):
-				body.sleeping = false
-			
-			# Soft push: match the player's velocity so it moves at our speed
-			var push_vel = velocity
-			push_vel.y = body.linear_velocity.y # Preserve its vertical gravity
-			body.linear_velocity = push_vel
-			
-			# Optional: add a tiny bit of extra force in the collision normal 
-			# to ensure they stay touching during the push
-			var push_dir = -collision.get_normal()
-			push_dir.y = 0
-			body.apply_central_force(push_dir * 10.0)
-
-	# --- 3. Timer & Sway Logic ---
 	play_time_passed += delta
-	
-	# Handle Camera Sway Intensity
-	var current_amplitude = 2.0
-	var current_speed = 1.5
-	
-	if play_time_passed > 30.0:
-		var progress = clamp((play_time_passed - 30.0) / 30.0, 0.0, 1.0)
-		current_amplitude = lerp(2.0, 15.0, progress)
-		current_speed = lerp(1.5, 2.5, progress)
-		
-	sway_phase += delta * current_speed
-	var sway_angle = sin(sway_phase) * current_amplitude
-
-	if is_instance_valid(camera):
-		camera.rotation_degrees.y = sway_angle
-		camera.rotation_degrees.z = sway_angle
-
-	# --- 4. UI Update & Game Over ---
 	var time_left = max(TOTAL_TIME - play_time_passed, 0.0)
-	
 	if timer_text_edit:
-		# int(ceil()) ensures the timer shows "1" until the last millisecond
 		timer_text_edit.text = "Time Left: " + str(int(ceil(time_left))) + "s"
-	
 	if time_left <= 0.0:
 		handle_game_over()
 
 func handle_game_over():
-	# Stops the game and makes the mouse visible
 	get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	if timer_text_edit:
-		timer_text_edit.text = "MISSION FAILED"
-	# Notify the new game mode manager so the shopping HUD shows the result
 	var gm := get_node_or_null("/root/GameModeManager")
 	if gm:
 		gm.notify_time_up()
