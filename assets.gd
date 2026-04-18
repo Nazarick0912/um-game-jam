@@ -6,6 +6,10 @@ func _ready():
 		generate_collision(item)
 
 func generate_collision(node):
+	# Skip the shopping cart because it has its own RigidBody collision logic
+	if "shopping-cart" in node.name.to_lower():
+		return
+
 	# If this node is a Mesh, give it a collision shape
 	if node is MeshInstance3D:
 		node.create_convex_collision()

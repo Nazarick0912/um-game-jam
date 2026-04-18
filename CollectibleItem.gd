@@ -116,5 +116,5 @@ func _do_collect() -> void:
 		gm.collect_item(item_id)
 
 	# Pop animation removed: Disable physics and processing immediately to avoid singular transforms
-	process_mode = Node.PROCESS_MODE_DISABLED
+	set_deferred("process_mode", Node.PROCESS_MODE_DISABLED)
 	queue_free()

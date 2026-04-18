@@ -98,6 +98,28 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+	# Loop through all current collisions
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var body = collision.get_collider()
+		
+		# If the player hits a RigidBody3D and is pressing the 'P' key
+		if body is RigidBody3D and Input.is_key_pressed(KEY_P):
+			# Wake up the cart if physics engine put it to sleep
+			if body.has_method("set_sleeping"):
+				body.sleeping = false
+			
+			# Soft push: match the player's velocity so it moves at our speed
+			var push_vel = velocity
+			push_vel.y = body.linear_velocity.y # Preserve its vertical gravity
+			body.linear_velocity = push_vel
+			
+			# Optional: add a tiny bit of extra force in the collision normal 
+			# to ensure they stay touching during the push
+			var push_dir = -collision.get_normal()
+			push_dir.y = 0
+			body.apply_central_force(push_dir * 10.0)
+
 	# --- 3. Timer & Sway Logic ---
 	play_time_passed += delta
 	

@@ -27,7 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://dht5rqsonn3ql" path="res://Mart Asset/Models/FBX format/shopping-basket.fbx" id="14_a6jrf"]
 [ext_resource type="PackedScene" uid="uid://bddcmdmfyndwq" path="res://Christmas Asset/KayKit_Holiday_Bits_1.0_FREE/Assets/fbx/present_A_blue.fbx" id="14_f6a44"]
 [ext_resource type="PackedScene" uid="uid://bteo5i5o8f34e" path="res://Kitchen Asset/KayKit_Restaurant_Bits_1.0_FREE/Assets/gltf/mustard.gltf" id="15_0cp0l"]
-[ext_resource type="PackedScene" uid="uid://htds7c0vy132" path="res://Mart Asset/Models/FBX format/shopping-cart.fbx" id="15_xuqvo"]
+[ext_resource type="PackedScene" uid="uid://byom4w6d8u7j7" path="res://shopping_cart.tscn" id="15_xuqvo"]
 [ext_resource type="PackedScene" uid="uid://8a5l4n4vr4cq" path="res://Mart Asset/Models/FBX format/wall-door-rotate.fbx" id="18_getpj"]
 [ext_resource type="PackedScene" uid="uid://bj71rnev7rnba" path="res://Mart Asset/Models/FBX format/wall-window.fbx" id="19_ryguw"]
 [ext_resource type="PackedScene" uid="uid://opr17rv4h7g4" path="res://Christmas Asset/KayKit_Holiday_Bits_1.0_FREE/Assets/fbx/lantern.fbx" id="29_0cbny"]
@@ -229,7 +229,7 @@ transform = Transform3D(-7.0568007e-07, 0, -0.99999976, 0, 1, 0, 16.14408, 0, -4
 transform = Transform3D(8.669986, 0, 0, 0, 1, 0, 0, 0, 0.83445716, -0.98854315, 0, 7.2530527)
 
 [node name="wall10" parent="Assets/Wall" unique_id=2087238268 instance=ExtResource("3_cegan")]
-transform = Transform3D(-8.39254, 0, 8.742278e-08, 0, 1, 0, -7.3369915e-07, 0, -1, -1.4487933, 0, 7.248516)
+transform = Transform3D(-8.39254, 0, 8.742278e-08, 0, 1, 0, -7.3369915e-07, 0, -1, -1.4562099, -2.2910535e-07, 7.2540054)
 
 [node name="wall4" parent="Assets/Wall" unique_id=1446572594 instance=ExtResource("3_cegan")]
 transform = Transform3D(-13.282014, 0, -8.742278e-08, 0, 1, 0, 1.1611505e-06, 0, -1, 1.1320118, 0, 16.51064)
@@ -1422,7 +1422,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0.1, -38)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27, 0.1, -43)
 
 [node name="Customer3" parent="GameNPCs" unique_id=-2094967291 instance=ExtResource("80_npc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0.1, -30)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.055851, 0.1, -30)
 
 [node name="Customer4" parent="GameNPCs" unique_id=-2094967290 instance=ExtResource("80_npc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0.1, -46)
