@@ -79,9 +79,9 @@
 [ext_resource type="PackedScene" uid="uid://bgcc57327j1b3" path="res://Character_System/Customer.tscn" id="80_npc"]
 [ext_resource type="Script" uid="uid://cnfi1qr1dgi1a" path="res://GameItemSpawner.gd" id="81_spawner"]
 [ext_resource type="Script" uid="uid://c018dayf71uyy" path="res://ShoppingHUD.gd" id="82_hud"]
-[ext_resource type="Shader" uid="uid://b30vm24a44or8" path="res://wavy_floor.gdshader" id="83_wavy"]
-[ext_resource type="Script" path="res://SunCycle.gd" id="84_sun"]
-[ext_resource type="Script" path="res://InstructionSign.gd" id="InstructionSign_res"]
+[ext_resource type="Shader" path="res://wavy_floor.gdshader" id="83_wavy"]
+[ext_resource type="Script" uid="uid://o5sdjtwyr0xv" path="res://SunCycle.gd" id="84_sun"]
+[ext_resource type="Script" uid="uid://cetwdb67kcx5t" path="res://InstructionSign.gd" id="InstructionSign_res"]
 
 [sub_resource type="Environment" id="Environment_gngh3"]
 background_mode = 1
@@ -176,6 +176,77 @@ shopping list before the
 time runs out!
 "
 font_size = 36
+outline_size = 10
+horizontal_alignment = 0
+script = ExtResource("InstructionSign_res")
+
+[node name="InstructionSign5" type="Label3D" parent="." unique_id=1950904045]
+transform = Transform3D(8.940697e-08, 0, -0.99889416, 0, 0.99889416, 0, 0.99889416, 0, 8.940697e-08, 24.556217, 5.870229, -5.0189133)
+pixel_size = 0.013
+modulate = Color(1, 0.72, 0.05, 1)
+text = "CARROTS"
+font_size = 100
+outline_size = 10
+horizontal_alignment = 0
+script = ExtResource("InstructionSign_res")
+
+[node name="InstructionSign6" type="Label3D" parent="." unique_id=1935078877]
+transform = Transform3D(0.99889416, 0, 0, 0, 0.99889416, 0, 0, 0, 0.99889416, 1.4759157, 3.411953, -45.4614)
+pixel_size = 0.013
+modulate = Color(1, 0.72, 0.05, 1)
+text = "KETCHUP"
+font_size = 40
+outline_size = 10
+horizontal_alignment = 0
+script = ExtResource("InstructionSign_res")
+
+[node name="InstructionSign11" type="Label3D" parent="." unique_id=1030587538]
+transform = Transform3D(0.99889416, 0, 0, 0, 0.99889416, 0, 0, 0, 0.99889416, -18.593817, 3.8533072, -44.51086)
+pixel_size = 0.013
+modulate = Color(1, 0.72, 0.05, 1)
+text = "CHECKOUT 
+HERE"
+font_size = 50
+outline_size = 10
+horizontal_alignment = 0
+script = ExtResource("InstructionSign_res")
+
+[node name="InstructionSign7" type="Label3D" parent="." unique_id=1413923296]
+transform = Transform3D(0.99889416, 0, 0, 0, 0.99889416, 0, 0, 0, 0.99889416, 4.4038334, 3.411953, -45.4614)
+pixel_size = 0.013
+modulate = Color(1, 0.72, 0.05, 1)
+text = "MUSTARD"
+font_size = 40
+outline_size = 10
+horizontal_alignment = 0
+script = ExtResource("InstructionSign_res")
+
+[node name="InstructionSign8" type="Label3D" parent="." unique_id=707538585]
+transform = Transform3D(0.99889416, 0, 0, 0, 0.99889416, 0, 0, 0, 0.99889416, 7.6729636, 3.411953, -45.4614)
+pixel_size = 0.013
+modulate = Color(1, 0.72, 0.05, 1)
+text = "JAR"
+font_size = 40
+outline_size = 10
+horizontal_alignment = 0
+script = ExtResource("InstructionSign_res")
+
+[node name="InstructionSign9" type="Label3D" parent="." unique_id=858119008]
+transform = Transform3D(0.99889416, 0, 0, 0, 0.99889416, 0, 0, 0, 0.99889416, 10.98433, 3.411953, -45.4614)
+pixel_size = 0.013
+modulate = Color(1, 0.72, 0.05, 1)
+text = "POT"
+font_size = 40
+outline_size = 10
+horizontal_alignment = 0
+script = ExtResource("InstructionSign_res")
+
+[node name="InstructionSign10" type="Label3D" parent="." unique_id=1357718237]
+transform = Transform3D(0.99889416, 0, 0, 0, 0.99889416, 0, 0, 0, 0.99889416, 14.496996, 3.411953, -45.4614)
+pixel_size = 0.013
+modulate = Color(1, 0.72, 0.05, 1)
+text = "KNIFE"
+font_size = 40
 outline_size = 10
 horizontal_alignment = 0
 script = ExtResource("InstructionSign_res")
@@ -1094,6 +1165,33 @@ transform = Transform3D(1.5887865, 0, 0, 0, 3.0785205, 0, 0, 0, 2.8731027, -4.81
 [node name="Box_B2" parent="Assets/Item" unique_id=194670832 instance=ExtResource("62_phcyf")]
 transform = Transform3D(1.4, 0, 0, 0, 1.2, 0, 0, 0, 1.4, -1.3440218, -1.5217655, 2.5942967)
 
+[node name="Box_B3" parent="Assets/Item" unique_id=2106450845 instance=ExtResource("62_phcyf")]
+transform = Transform3D(1.4, 0, 0, 0, 1.2, 0, 0, 0, 1.4, -1.3440218, -1.5217655, 2.0530148)
+
+[node name="Box_B4" parent="Assets/Item" unique_id=867222619 instance=ExtResource("62_phcyf")]
+transform = Transform3D(1.4, 0, 0, 0, 1.2, 0, 0, 0, 1.4, -1.3440218, -1.5217655, 1.5204788)
+
+[node name="Box_B9" parent="Assets/Item" unique_id=1187367039 instance=ExtResource("62_phcyf")]
+transform = Transform3D(1.4, 0, 0, 0, 1.2, 0, 0, 0, 1.4, -1.3440218, -1.0427752, 2.5942967)
+
+[node name="Box_B10" parent="Assets/Item" unique_id=803965612 instance=ExtResource("62_phcyf")]
+transform = Transform3D(1.4, 0, 0, 0, 1.2, 0, 0, 0, 1.4, -1.3440218, -1.0427752, 2.0530148)
+
+[node name="Box_B11" parent="Assets/Item" unique_id=1771977733 instance=ExtResource("62_phcyf")]
+transform = Transform3D(1.4, 0, 0, 0, 1.2, 0, 0, 0, 1.4, -1.3440218, -1.0427752, 1.5204788)
+
+[node name="Box_B6" parent="Assets/Item" unique_id=508296513 instance=ExtResource("62_phcyf")]
+transform = Transform3D(1.4, 0, 0, 0, 1.2, 0, 0, 0, 1.4, -2.1860285, -1.5217655, 2.5942967)
+
+[node name="Box_B7" parent="Assets/Item" unique_id=808152564 instance=ExtResource("62_phcyf")]
+transform = Transform3D(1.4, 0, 0, 0, 1.2, 0, 0, 0, 1.4, -2.1860285, -1.5217655, 2.0530148)
+
+[node name="Box_B8" parent="Assets/Item" unique_id=1307118073 instance=ExtResource("62_phcyf")]
+transform = Transform3D(1.4, 0, 0, 0, 1.2, 0, 0, 0, 1.4, -2.1860285, -1.5217655, 1.5204788)
+
+[node name="Box_B5" parent="Assets/Item" unique_id=1069555250 instance=ExtResource("62_phcyf")]
+transform = Transform3D(1.4, 0, 0, 0, 1.2, 0, 0, 0, 1.4, -1.3440218, -1.5217655, 1.5204788)
+
 [node name="Box_C6" parent="Assets/Item" unique_id=1682638334 instance=ExtResource("61_5dllo")]
 transform = Transform3D(0.53527963, 0, 0.2144675, 0, 0.35738274, 0, -0.45281443, 0, 0.24365613, -4.8984213, -0.19344532, 11.738676)
 
@@ -1522,10 +1620,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.1, -30)
 
 [node name="Customer25" parent="GameNPCs" unique_id=-2094967325 instance=ExtResource("80_npc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 0.1, -54)
-
-
-
-
 
 [node name="GameItemSpawner" type="Node" parent="." unique_id=-2094967282]
 script = ExtResource("81_spawner")
