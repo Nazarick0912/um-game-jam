@@ -125,6 +125,35 @@ outline_size = 10
 horizontal_alignment = 0
 script = ExtResource("InstructionSign_res")
 
+[node name="InstructionSign13" type="Label3D" parent="." unique_id=1062648901]
+transform = Transform3D(0, 0, 0.99889416, 0, 0.99889416, 0, -0.99889416, 0, 0, -33.76608, 3.8673759, -26.46411)
+pixel_size = 0.013
+modulate = Color(1, 0.72, 0.05, 1)
+text = "🛒  LAST 60 SECONDS BEFORE 
+LOSING CONTROL
+━━━━━━━━━━━━━━━━━
+
+🎮  HOW TO PLAY
+
+  WASD  ─  Move
+  Double-tap WASD  ─  Sprint
+  E  ─  Grab / Release cart
+  Mouse  ─  Look around
+  Scroll Wheel  ─  Zoom camera"
+font_size = 36
+outline_size = 10
+horizontal_alignment = 0
+script = ExtResource("InstructionSign_res")
+
+[node name="InstructionSign12" type="Label3D" parent="." unique_id=2060357225]
+transform = Transform3D(0, 0, 0.99889416, 0, 0.99889416, 0, -0.99889416, 0, 0, -33.76608, 3.8673759, -26.218637)
+pixel_size = 0.013
+modulate = Color(1, 0.72, 0.05, 1)
+font_size = 36
+outline_size = 10
+horizontal_alignment = 0
+script = ExtResource("InstructionSign_res")
+
 [node name="InstructionSign4" type="Label3D" parent="." unique_id=1379595433]
 transform = Transform3D(0.99889416, 0, 2.9802322e-08, 0, 0.99889416, 0, -2.9802322e-08, 0, 0.99889416, -33.30065, 4.58334, -42.1075)
 pixel_size = 0.013
@@ -143,21 +172,11 @@ horizontal_alignment = 0
 script = ExtResource("InstructionSign_res")
 
 [node name="InstructionSign2" type="Label3D" parent="." unique_id=457072174]
-transform = Transform3D(0, 0, 0.99889416, 0, 0.99889416, 0, -0.99889416, 0, 0, -33.75, 3.8589687, -26.690462)
+transform = Transform3D(0, 0, 0.99889416, 0, 0.99889416, 0, -0.99889416, 0, 0, -23.737146, 5.527343, 3.82344)
 pixel_size = 0.013
 modulate = Color(1, 0.72, 0.05, 1)
-text = "🛒  LAST 60 SECONDS BEFORE 
-LOSING CONTROL
-━━━━━━━━━━━━━━━━━
-
-🎮  HOW TO PLAY
-
-  WASD  ─  Move
-  Double-tap WASD  ─  Sprint
-  E  ─  Grab / Release cart
-  Mouse  ─  Look around
-  Scroll Wheel  ─  Zoom camera"
-font_size = 36
+text = "ALMOST THERE !!!"
+font_size = 54
 outline_size = 10
 horizontal_alignment = 0
 script = ExtResource("InstructionSign_res")
